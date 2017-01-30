@@ -30,6 +30,16 @@ fedoragsearch-conf
         └── updater.properties
 ```
 
+The `fedoragsearch.properties` file available here incorporates changes from [Discovery Garden's multithreaded tuning notes](https://github.com/discoverygarden/basic-solr-config/wiki/performance-tuning-for-multithreaded-solr-ingest). Other changes based on the Discovery Garden tuning notes are present in this directory; e.g. `updater/`.
+
+`fgsconfig-basic-configForIslandora.properties` requires additional updates before it is ready for production:
+* lines 22 and 26; gsearchUser information
+* line 32; finalConfigPath setting
+* line 40; logging level
+* lines 59 and 63; fedoraUser information
+* line 67; fedora version information
+* line 71; file path to fedora's objectStore
+
 #### fedoragsearch-transforms ####
 ```
 fedoragsearch-transforms/
