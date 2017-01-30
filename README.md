@@ -10,6 +10,8 @@ fedora-conf/
 └── fedora.fcfg
 ```
 
+The `fedora.fcfg` available here incorporates changes from [Discovery Garden's multithreaded tuning notes](https://github.com/discoverygarden/basic-solr-config/wiki/performance-tuning-for-multithreaded-solr-ingest).
+
 #### fedoragsearch-conf ####
 ```
 fedoragsearch-conf
