@@ -28,7 +28,8 @@
       <xsl:with-param name="datastream" select="../@ID"/>
     </xsl:apply-templates>
 
-    <xsl:apply-templates mode="utk_MODS" select="$content//mods:mods[1]"/>
+    <xsl:apply-templates mode="utk_MODS" select="$content//mods:mods[1][not(starts-with(mods:identifier, 'utk_'))]"/>
+    <xsl:apply-templates mode="utk_ir_MODS" select="$content//mods:mods[1][starts-with(mods:identifier, 'utk_')]"/>
   </xsl:template>
 
   <!--
@@ -164,6 +165,35 @@
       <xsl:for-each select=".">
         <xsl:value-of select="concat(.,' ')"/>
       </xsl:for-each>
+    </field>
+  </xsl:template>
+
+  <!-- utk_ir_MODS mode -->
+  <!-- the following template creates an _ms field for author(s) -->
+  <xsl:template match="mods:mods/mods:name[mods:role/mods:roleTerm='Author']" mode="utk_ir_MODS">
+    <xsl:variable name="given-n" select="mods:namePart[@type='given']"/>
+    <xsl:variable name="family-n" select="mods:namePart[@type='family']"/>
+
+    <field name="utk_ir_mods_name_author_ms">
+      <xsl:value-of select="concat($given-n, ' ', $family-n, ' (Author)')"/>
+    </field>
+  </xsl:template>
+
+  <!-- the following template creates an _ms field for thesis advisors -->
+  <xsl:template match="mods:mods/mods:name[mods:role/mods:roleTerm='Thesis advisor']" mode="utk_ir_MODS">
+    <xsl:variable name="advisor" select="mods:displayForm"/>
+
+    <field name="utk_ir_mods_name_thesis_advisor_ms">
+      <xsl:value-of select="concat($advisor, ' (Thesis advisor)')"/>
+    </field>
+  </xsl:template>
+
+  <!-- the following template creates an _ms field for committee members -->
+  <xsl:template match="mods:mods/mods:name[mods:role/mods:roleTerm='Committee member']" mode="utk_ir_MODS">
+    <xsl:variable name="comm-member" select="mods:displayForm"/>
+
+    <field name="utk_ir_mods_name_committee_member_ms">
+      <xsl:value-of select="concat($comm-member, ' (Committee member)')"/>
     </field>
   </xsl:template>
 
