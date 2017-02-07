@@ -214,6 +214,15 @@
     </field>
   </xsl:template>
 
+  <!-- the following template creates a utk_ir_mods abstract field for all abstracts, in case there are multiple -->
+  <xsl:template match="mods:mods/mods:abstract" mode="utk_ir_MODS">
+    <field name="utk_ir_mods_abstract_ms">
+      <xsl:for-each select=".">
+        <xsl:value-of select="concat(., ' ')"/>
+      </xsl:for-each>
+    </field>
+  </xsl:template>
+
   <!-- Handle dates. -->
   <xsl:template match="mods:*[(@type='date') or (contains(translate(local-name(), 'D', 'd'), 'date'))][normalize-space(text())]" mode="slurping_MODS">
     <xsl:param name="prefix"/>
