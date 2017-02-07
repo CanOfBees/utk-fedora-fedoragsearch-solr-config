@@ -175,7 +175,7 @@
     <xsl:variable name="family-n" select="mods:namePart[@type='family']"/>
 
     <field name="utk_ir_mods_name_author_ms">
-      <xsl:value-of select="concat($given-n, ' ', $family-n, ' (Author)')"/>
+      <xsl:value-of select="concat($given-n, ' ', $family-n)"/>
     </field>
   </xsl:template>
 
@@ -184,7 +184,7 @@
     <xsl:variable name="advisor" select="mods:displayForm"/>
 
     <field name="utk_ir_mods_name_thesis_advisor_ms">
-      <xsl:value-of select="concat($advisor, ' (Thesis advisor)')"/>
+      <xsl:value-of select="$advisor"/>
     </field>
   </xsl:template>
 
@@ -193,7 +193,7 @@
     <xsl:variable name="comm-member" select="mods:displayForm"/>
 
     <field name="utk_ir_mods_name_committee_member_ms">
-      <xsl:value-of select="concat($comm-member, ' (Committee member)')"/>
+      <xsl:value-of select="$comm-member"/>
     </field>
   </xsl:template>
 
