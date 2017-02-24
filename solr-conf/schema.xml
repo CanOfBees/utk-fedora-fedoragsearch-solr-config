@@ -335,8 +335,6 @@
         unknown fields indexed and/or stored by default -->
    <field name="dc.description" type="text_fgs"  indexed="true"  stored="true" multiValued="true"/>
    <dynamicField name="*" type="text_fgs"  indexed="true"  stored="true" multiValued="true"/>
-   <field name="_version_" type="long" indexed="true" stored="true"/>
-
  </fields>
 
  <!-- Field to use to determine and enforce document uniqueness.
