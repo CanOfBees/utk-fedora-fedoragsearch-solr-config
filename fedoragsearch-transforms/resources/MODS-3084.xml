@@ -1,0 +1,61 @@
+<mods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.loc.gov/mods/v3" version="3.5" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-5.xsd">
+  <identifier type="local">utk_gradthes/3084</identifier>
+  <name>
+    <namePart type="family">Albert</namePart>
+    <namePart type="given">Michael F.</namePart>
+    <role>
+      <roleTerm type="text" authority="marcrelator" valueURI="http://id.loc.gov/vocabulary/relators/aut">Author</roleTerm>
+    </role>
+  </name>
+  <name>
+    <displayForm>Jack S. Watson</displayForm>
+    <role>
+      <roleTerm type="text" authority="marcrelator" valueURI="http://id.loc.gov/vocabulary/relators/ths">Thesis advisor</roleTerm>
+    </role>
+  </name>
+  <name>
+    <displayForm>Joseph J. Perona</displayForm>
+    <role>
+      <roleTerm authority="marcrelator">Committee member</roleTerm>
+    </role>
+  </name>
+  <name>
+    <displayForm>H. L. Dodds Jr.</displayForm>
+    <role>
+      <roleTerm authority="marcrelator">Committee member</roleTerm>
+    </role>
+  </name>
+  <titleInfo>
+    <title>The Absorption of Gaseous Iodine by Water Droplets</title>
+  </titleInfo>
+  <subject>
+    <topic>Chemical Engineering</topic>
+  </subject>
+  <abstract>&lt;p&gt;A new model has been developed for predicting the rate at which gaseous molecular iodine is absorbed by water sprays. The model is a quasi-steady state mass transfer model that includes the iodine hydrolysis reactions. The parameters of the model are spray drop size initial concentration of the gas and liquid phases temperature pressure buffered or unbuffered spray solution spray flow rate containment diameter and drop fall height. The results of the model were studied under many values of these parameters. Plots of concentration of iodine species in the drop versus time have been produced by varying the initial gas phase concentration of molecular iodine over the range of 1 x 10&lt;sup&gt;-10 &lt;/sup&gt; moles/liter and a drop size of 1000 microns.&lt;/p&gt;
+&lt;p&gt;Results from the model are compared to results available from the Containment Systems Experiments at Pacific Northwest Laboratory. The difference between the model predictions and the experimental data ranges from -120.5% to 68.0% with the closest agreement 7.7%. The new spray model is also compared to previously existing spray models. At high concentrations of gaseous molecular iodine the new spray model is considered to be less accurate but at low concentrations the new model predicts results that are closer to the experimental data. Inclusion of the iodine hydrolysis reactions is shown to be a feature important to a model intended for determining the removal of molecular iodine over a wide range of conditions.&lt;/p&gt;</abstract>
+  <typeOfResource>text</typeOfResource>
+  <originInfo>
+    <dateCreated encoding="w3cdtf">2015-01-15T11:19:52-08:00</dateCreated>
+    <dateIssued keyDate="yes" encoding="edtf">1985-03</dateIssued>
+  </originInfo>
+  <extension xmlns:etd="http://www.ndltd.org/standards/etdms/1.1">
+    <etd:degree>
+      <etd:name>Master of Science</etd:name>
+    </etd:degree>
+    <etd:discipline>Chemical Engineering</etd:discipline>
+    <etd:grantor>University of Tennessee</etd:grantor>
+  </extension>
+  <genre authority="lcgft" valueURI="http://id.loc.gov/authorities/genreForms/gf2014026039">Academic theses</genre>
+  <note displayLabel="Keywords submitted by author"/>
+  <relatedItem type="series">
+    <titleInfo lang="eng">
+      <title>Graduate Theses and Dissertations</title>
+    </titleInfo>
+  </relatedItem>
+  <recordInfo displayLabel="Submission">
+    <recordCreationDate encoding="w3cdtf">2015-01-15T11:19:52-08:00</recordCreationDate>
+    <recordContentSource>University of Tennessee, Knoxville Libraries</recordContentSource>
+    <recordOrigin>Converted from bepress XML to MODS in general compliance to the MODS Guidelines (Version 3.5).</recordOrigin>
+    <recordChangeDate encoding="w3cdtf">2017-01-20T23:06:10-05:00</recordChangeDate>
+  </recordInfo>
+</mods>

@@ -1,0 +1,127 @@
+<mods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.loc.gov/mods/v3" version="3.5" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-5.xsd">
+  <identifier type="local">utk_gradthes/1056</identifier>
+  <name>
+    <namePart type="family">Atherton</namePart>
+    <namePart type="given">Stanley Arthur</namePart>
+    <role>
+      <roleTerm type="text" authority="marcrelator" valueURI="http://id.loc.gov/vocabulary/relators/aut">Author</roleTerm>
+    </role>
+  </name>
+  <name>
+    <displayForm>Williiam A. Miller</displayForm>
+    <role>
+      <roleTerm type="text" authority="marcrelator" valueURI="http://id.loc.gov/vocabulary/relators/ths">Thesis advisor</roleTerm>
+    </role>
+  </name>
+  <name>
+    <displayForm>Rao Arimilli</displayForm>
+    <role>
+      <roleTerm authority="marcrelator">Committee member</roleTerm>
+    </role>
+  </name>
+  <name>
+    <displayForm>James Conklin</displayForm>
+    <role>
+      <roleTerm authority="marcrelator">Committee member</roleTerm>
+    </role>
+  </name>
+  <titleInfo>
+    <title>Residential Attic Ventilation In A Hot And Humid Climate: Effects Of Increased Ventilation On Thermal Performance And Moisture Control</title>
+  </titleInfo>
+  <subject>
+    <topic>Other Mechanical Engineering</topic>
+  </subject>
+  <abstract>&lt;p&gt;The reality of the effect of natural ventilation in a residential attic cavity has been the topic of many debates and scholarly reports since the 1930’s. The purpose of ventilating an attic cavity is to prevent collection of condensate on the structural surfaces and to create a thermal buffer between the conditioned space and the ambient air. The current standards are not specific to climate zone despite the fact that each climate zone may require ventilation for very different reasons.&lt;/p&gt;
+&lt;p&gt;To address the issue of ventilation effects in a hot and humid climate a Natural Exposure Testing facility was constructed in Charleston South Carolina in 2008. This multi-cavity in-situ facility is equipped with seven separate attic bays featuring a wide variety of construction materials for performance comparison. Yearly performance comparison data has been examined for key observations on the effect of ventilation which comprises approximately half of this report.&lt;/p&gt;
+&lt;p&gt;Furthermore an industry-standard attic performance prediction tool was benchmarked to the field data and is shown to be accurate for predicting diurnal performance of the NET facility. A battery of simulations were run for diurnal air exchange rates the results of which are compared to gas tracer analysis tests performed during the Summer of 2011.&lt;/p&gt;
+&lt;p&gt;A parametric study involving various attic ventilation area ratios was performed using the benchmarked prediction tool to show the effect of varying ventilation area ratios on the thermal and moisture-control capabilities of attics with standard construction Above Sheathing Ventilation and Radiant Barrier systems.&lt;/p&gt;
+&lt;p&gt;The results of this study are based on the analysis of field data benchmarked simulations and parametric study on ventilation ratio effectiveness. Ventilation variation is shown to have only a minor effect on the moisture control and thermal performance of residential attic cavities. In comparison attics equipped with radiant barrier foil or above sheathing ventilation provide a greater range of control over thermal and moisture infiltration.&lt;/p&gt;</abstract>
+  <typeOfResource>text</typeOfResource>
+  <originInfo>
+    <dateCreated encoding="w3cdtf">2011-11-17T08:11:17-08:00</dateCreated>
+    <dateIssued keyDate="yes" encoding="edtf">2011-12</dateIssued>
+  </originInfo>
+  <extension xmlns:etd="http://www.ndltd.org/standards/etdms/1.1">
+    <etd:degree>
+      <etd:name>Master of Science</etd:name>
+    </etd:degree>
+    <etd:discipline>Mechanical Engineering</etd:discipline>
+    <etd:grantor>University of Tennessee</etd:grantor>
+  </extension>
+  <genre authority="lcgft" valueURI="http://id.loc.gov/authorities/genreForms/gf2014026039">Academic theses</genre>
+  <note displayLabel="Keywords submitted by author">Attic Ventilation, Residential Engineering, Radiant Barrier, Attic Condensation, Above Sheathing Ventilation, Soffit and Ridge Ventilation</note>
+  <relatedItem type="series">
+    <titleInfo lang="eng">
+      <title>Graduate Theses and Dissertations</title>
+    </titleInfo>
+  </relatedItem>
+  <relatedItem type="constituent">
+    <titleInfo>
+      <title>AtticSim_ASV_Version_IV_DPMACRO.for</title>
+    </titleInfo>
+    <physicalDescription>
+      <internetMediaType>text/x-fortran</internetMediaType>
+    </physicalDescription>
+    <note displayLabel="supplemental_file">SUPPL_1</note>
+  </relatedItem>
+  <relatedItem type="constituent">
+    <titleInfo>
+      <title>AtticSim_Execute.bat</title>
+    </titleInfo>
+    <physicalDescription>
+      <internetMediaType>text/plain</internetMediaType>
+    </physicalDescription>
+    <note displayLabel="supplemental_file">SUPPL_2</note>
+  </relatedItem>
+  <relatedItem type="constituent">
+    <titleInfo>
+      <title>AtticSim_Output.bas</title>
+    </titleInfo>
+    <physicalDescription>
+      <internetMediaType>text/plain</internetMediaType>
+    </physicalDescription>
+    <note displayLabel="supplemental_file">SUPPL_3</note>
+  </relatedItem>
+  <relatedItem type="constituent">
+    <titleInfo>
+      <title>BoundaryCondition_Creator.bas</title>
+    </titleInfo>
+    <physicalDescription>
+      <internetMediaType>text/plain</internetMediaType>
+    </physicalDescription>
+    <note displayLabel="supplemental_file">SUPPL_4</note>
+  </relatedItem>
+  <relatedItem type="constituent">
+    <titleInfo>
+      <title>Clean_Convert.bas</title>
+    </titleInfo>
+    <physicalDescription>
+      <internetMediaType>text/plain</internetMediaType>
+    </physicalDescription>
+    <note displayLabel="supplemental_file">SUPPL_5</note>
+  </relatedItem>
+  <relatedItem type="constituent">
+    <titleInfo>
+      <title>Raw_Complier.bas</title>
+    </titleInfo>
+    <physicalDescription>
+      <internetMediaType>text/plain</internetMediaType>
+    </physicalDescription>
+    <note displayLabel="supplemental_file">SUPPL_6</note>
+  </relatedItem>
+  <relatedItem type="constituent">
+    <titleInfo>
+      <title>T_RH_Calibration.pdf</title>
+    </titleInfo>
+    <physicalDescription>
+      <internetMediaType>application/pdf</internetMediaType>
+    </physicalDescription>
+    <note displayLabel="supplemental_file">SUPPL_7</note>
+  </relatedItem>
+  <recordInfo displayLabel="Submission">
+    <recordCreationDate encoding="w3cdtf">2011-11-17T08:11:17-08:00</recordCreationDate>
+    <recordContentSource>University of Tennessee, Knoxville Libraries</recordContentSource>
+    <recordOrigin>Converted from bepress XML to MODS in general compliance to the MODS Guidelines (Version 3.5).</recordOrigin>
+    <recordChangeDate encoding="w3cdtf">2017-01-20T23:06:10-05:00</recordChangeDate>
+  </recordInfo>
+</mods>
