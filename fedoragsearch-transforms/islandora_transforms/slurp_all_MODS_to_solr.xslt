@@ -7,12 +7,12 @@
   xmlns:mods="http://www.loc.gov/mods/v3"
      exclude-result-prefixes="mods java">
   <xsl:include href="library/xslt-date-template.xslt"/>
-  <xsl:include href="manuscript_finding_aid.xslt"/>
 
   <!-- HashSet to track single-valued fields. -->
   <xsl:variable name="single_valued_hashset" select="java:java.util.HashSet.new()"/>
 
-  <xsl:template match="foxml:datastream[@ID='MODS']/foxml:datastreamVersion[last()]" name="index_MODS">
+  <!-- this is now geared towards an individual MODS record -->
+  <xsl:template match="/" name="index_MODS">
     <xsl:param name="content"/>
     <xsl:param name="prefix"></xsl:param>
     <xsl:param name="suffix">ms</xsl:param>
@@ -20,24 +20,29 @@
     <!-- Clearing hash in case the template is ran more than once. -->
     <xsl:variable name="return_from_clear" select="java:clear($single_valued_hashset)"/>
 
-    <xsl:apply-templates mode="slurping_MODS" select="$content//mods:mods[1]">
-      <xsl:with-param name="prefix" select="$prefix"/>
-      <xsl:with-param name="suffix" select="$suffix"/>
-      <xsl:with-param name="pid" select="../../@PID"/>
-      <xsl:with-param name="datastream" select="../@ID"/>
-    </xsl:apply-templates>
+    <doc>
+      <xsl:apply-templates mode="slurping_MODS" select="$content//mods:mods[1]">
+        <xsl:with-param name="prefix" select="$prefix"/>
+        <xsl:with-param name="suffix" select="$suffix"/>
+        <xsl:with-param name="pid" select="../../@PID"/>
+        <xsl:with-param name="datastream" select="../@ID"/>
+      </xsl:apply-templates>
 
-    <!--
-      creates a mode for MODS records that do *not* have a mods:identifer starting with 'utk_' *AND* do *not* have a
-      mods:genre = 'Academic theses'.
-    -->
-    <xsl:apply-templates mode="utk_MODS" select="$content//mods:mods[1][(not(starts-with(mods:identifier, 'utk_'))) and (not(mods:genre[@authority='lcgft'][@valueURI='http://id.loc.gov/authorities/genreForms/gf2014026039']='Academic theses'))]"/>
+      <!--
+        creates a mode for MODS records that do *not* have a mods:identifer starting with 'utk_' *AND* do *not* have a
+        mods:genre = 'Academic theses'.
+      -->
+      <xsl:apply-templates mode="utk_MODS"
+                           select="$content//mods:mods[1][(not(starts-with(mods:identifier, 'utk_'))) and (not(mods:genre[@authority='lcgft'][@valueURI='http://id.loc.gov/authorities/genreForms/gf2014026039']='Academic theses'))]"/>
 
-    <!--
-      creates a mode for MODS record that *do* have a mods:identifier starting with 'utk_' (migration data!) *OR* a
-      mods:genre = 'Academic theses'.
-    -->
-    <xsl:apply-templates mode="utk_ir_MODS" select="$content//mods:mods[1][(starts-with(mods:identifier, 'utk_')) or (mods:genre[@authority='lcgft'][@valueURI='http://id.loc.gov/authorities/genreForms/gf2014026039']='Academic theses')]"/>
+      <!--
+        creates a mode for MODS record that *do* have a mods:identifier starting with 'utk_' (migration data!) *OR* a
+        mods:genre = 'Academic theses'.
+      -->
+      <xsl:apply-templates mode="utk_ir_MODS"
+                           select="$content//mods:mods[1][(starts-with(mods:identifier, 'utk_')) or (mods:genre[@authority='lcgft'][@valueURI='http://id.loc.gov/authorities/genreForms/gf2014026039']='Academic theses')]"/>
+    </doc>
+
   </xsl:template>
 
   <!--
