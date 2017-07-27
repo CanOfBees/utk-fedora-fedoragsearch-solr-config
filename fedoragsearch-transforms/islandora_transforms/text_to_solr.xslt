@@ -17,7 +17,7 @@
         <xsl:value-of select="concat(../@ID, '_t')"/>
       </xsl:attribute>
       <xsl:value-of select="$content"/>
-  </field>
+    </field>
 
   </xsl:template>
 </xsl:stylesheet>
