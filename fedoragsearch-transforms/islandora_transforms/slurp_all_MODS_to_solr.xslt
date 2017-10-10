@@ -32,14 +32,7 @@
       creates a mode for MODS records that do *not* have a mods:identifer starting with 'utk_' *AND* do *not* have a
       mods:genre = 'Academic theses'.
     -->
-    <xsl:apply-templates mode="utk_MODS" select="$content//mods:mods[1][(not(starts-with(mods:identifier, 'utk_'))) and (not(mods:genre[@authority='lcgft'][@valueURI='http://id.loc.gov/authorities/genreForms/gf2014026039']='Academic theses'))]"/>
-
-    <!--
-      creates a mode for MODS record that *do* have a mods:identifier starting with 'utk_' (migration data!) *OR* a
-      mods:genre = 'Academic theses'.
-    -->
-    <xsl:apply-templates mode="utk_ir_MODS" select="$content//mods:mods[1][(starts-with(mods:identifier, 'utk_')) or (mods:genre[@authority='lcgft'][@valueURI='http://id.loc.gov/authorities/genreForms/gf2014026039']='Academic theses')]"/>
-  </xsl:template>
+    <xsl:apply-templates mode="utk_MODS" select="$content//mods:mods[1]"/>
 
   <!--
     additional templating for our MODS name/roles and geographic terms/coordinates
@@ -173,52 +166,6 @@
     <field name="utk_mods_abstract_ms">
       <xsl:for-each select=".">
         <xsl:value-of select="concat(.,' ')"/>
-      </xsl:for-each>
-    </field>
-  </xsl:template>
-
-  <!-- utk_ir_MODS mode -->
-  <!-- the following template creates an _ms field for author(s) -->
-  <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Author') or (mods:role/mods:roleTerm='author')]" mode="utk_ir_MODS">
-    <xsl:variable name="given-n" select="mods:namePart[@type='given']"/>
-    <xsl:variable name="family-n" select="mods:namePart[@type='family']"/>
-    <xsl:variable name="t-o-address" select="mods:namePart[@type='termsOfAddress']"/>
-
-    <field name="utk_ir_mods_name_author_ms">
-      <xsl:choose>
-        <xsl:when test="$t-o-address!=''">
-          <xsl:value-of select="concat($given-n, ' ', $family-n, ', ', $t-o-address)"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="concat($given-n, ' ', $family-n)"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </field>
-  </xsl:template>
-
-  <!-- the following template creates an _ms field for thesis advisors -->
-  <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Thesis advisor') or (mods:role/mods:roleTerm='thesis advisor')]" mode="utk_ir_MODS">
-    <xsl:variable name="advisor" select="mods:displayForm"/>
-
-    <field name="utk_ir_mods_name_thesis_advisor_ms">
-      <xsl:value-of select="$advisor"/>
-    </field>
-  </xsl:template>
-
-  <!-- the following template creates an _ms field for committee members -->
-  <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Committee member') or (mods:role/mods:roleTerm='Committee Member')]" mode="utk_ir_MODS">
-    <xsl:variable name="comm-member" select="mods:displayForm"/>
-
-    <field name="utk_ir_mods_name_committee_member_ms">
-      <xsl:value-of select="$comm-member"/>
-    </field>
-  </xsl:template>
-
-  <!-- the following template creates a utk_ir_mods abstract field for all abstracts, in case there are multiple -->
-  <xsl:template match="mods:mods/mods:abstract" mode="utk_ir_MODS">
-    <field name="utk_ir_mods_abstract_ms">
-      <xsl:for-each select=".">
-        <xsl:value-of select="concat(., ' ')"/>
       </xsl:for-each>
     </field>
   </xsl:template>
