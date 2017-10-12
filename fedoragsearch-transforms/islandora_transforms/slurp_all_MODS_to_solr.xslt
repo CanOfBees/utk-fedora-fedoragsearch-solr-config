@@ -82,6 +82,13 @@
     </field>
   </xsl:template>
 
+  <!-- the following template adds a date_of_award field -->
+  <xsl:template match="mods:mods/mods:genre[@authority='COAR'][text()='thesis']" mode="utk_ir_MODS">
+    <field name="utk_mods_etd_date_of_award_s">
+      <xsl:value-of select="preceding-sibling::mods:originInfo/mods:dateIssued[@keyDate='yes'][@encoding='edtf']"/>
+    </field>
+  </xsl:template>
+
   <!-- Handle dates. -->
   <xsl:template match="mods:*[(@type='date') or (contains(translate(local-name(), 'D', 'd'), 'date'))][normalize-space(text())]" mode="slurping_MODS">
     <xsl:param name="prefix"/>
