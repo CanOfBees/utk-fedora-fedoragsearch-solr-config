@@ -55,30 +55,30 @@
     </field>
   </xsl:template>
 
+  <!-- utk_mods_etd mode -->
+  
   <!-- JIRA TRAC-875 Define utk_mods_etd_author in Solr -->
+  <!-- the following template creates an _s field for single etd author -->
+  <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Author') or (mods:role/mods:roleTerm='author')]" mode="utk_mods_etd">
+    <xsl:variable name="given-n" select="mods:namePart[@type='given']"/>
+    <xsl:variable name="family-n" select="mods:namePart[@type='family']"/>
+    <xsl:variable name="t-o-address" select="mods:namePart[@type='termsOfAddress']"/>
 
-    <!-- utk_mods_etd mode -->
-      <!-- the following template creates an _ms field for author(s) -->
-        <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Author') or (mods:role/mods:roleTerm='author')]" mode="utk_mods_etd">
-		    <xsl:variable name="given-n" select="mods:namePart[@type='given']"/>
-		        <xsl:variable name="family-n" select="mods:namePart[@type='family']"/>
-			    <xsl:variable name="t-o-address" select="mods:namePart[@type='termsOfAddress']"/>
+    <field name="utk_etd_mods_name_author_s">
+      <xsl:choose>
+        <xsl:when test="$t-o-address!=''">
+          <xsl:value-of select="concat($given-n, ' ', $family-n, ', ', $t-o-address)"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="concat($given-n, ' ', $family-n)"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </field>
+  </xsl:template>
 
-			        <field name="utk_etd_mods_name_author">
-					      <xsl:choose>
-						              <xsl:when test="$t-o-address!=''">
-								                <xsl:value-of select="concat($given-n, ' ', $family-n, ', ', $t-o-address)"/>
-										        </xsl:when>
-											        <xsl:otherwise>
-													          <xsl:value-of select="concat($given-n, ' ', $family-n)"/>
-														          </xsl:otherwise>
-															        </xsl:choose>
-																    </field>
-																      </xsl:template>
+<!-- JIRA TRAC-875 Define utk_mods_etd_author in Solr -->
 
-
-																      <!-- JIRA TRAC-875 Define utk_mods_etd_author in Solr -->
-
+<!-- utk_mods_etd mode -->
 
   <!-- the following template creates an _ms field for thesis advisors -->
   <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Thesis advisor') or (mods:role/mods:roleTerm='thesis advisor')]" mode="utk_ir_MODS">
