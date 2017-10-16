@@ -62,6 +62,7 @@
 
   <!-- JIRA TRAC-875 Define utk_mods_etd_author in Solr -->
   <!-- the following template creates an _s field for single etd author -->
+  <!-- need to  use single_valued_hashset -->
   <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Author') or 
     (mods:role/mods:roleTerm='author')]" mode="utk_mods_etd">
     <xsl:variable name="given-n" select="mods:namePart[@type='given']"/>
