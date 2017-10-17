@@ -82,14 +82,13 @@
   </xsl:template>
 
 
-  <!-- utk_mods_etd mode -->
-  <!-- utk_mods_etd mode -->
+  <!-- utk_mods_etd  -->
+  <!-- utk_mods_etd  -->
 
-  <!-- the following template creates a geoSubject+coordinates _ms field-->
   
   <!-- JIRA TRAC-875 Define utk_mods_etd_author in Solr -->
   <!-- the following template creates an _s field for single etd author -->
-  <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Author') or (mods:role/mods:roleTerm='author')]" mode="utk_mods_etd">
+  <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Author') or (mods:role/mods:roleTerm='author')]" mode="utk_ir_MODS">
     <xsl:variable name="given-n" select="mods:namePart[@type='given']"/>
     <xsl:variable name="family-n" select="mods:namePart[@type='family']"/>
     <xsl:variable name="t-o-address" select="mods:namePart[@type='termsOfAddress']"/>
@@ -107,18 +106,6 @@
   </xsl:template>
 
 
-
-
-<!-- TRAC-876 Define utk_mods_etd_author_orcid in Solr -->
-<!-- the following template creates an _s field for single orcid -->
-
-<!-- TRAC-886  Define utk_mods_thesis_advisor in Solr based on updated data dictionary -->
-
-<!-- TRAC-891 Define utk_mods_committee_member in Solr based on updated data dictionary -->
-
-
-<!-- utk_mods_etd mode -->
-<!-- utk_mods_etd mode -->
 
   <!-- the following template creates an _ms field for thesis advisors -->
   <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Thesis advisor') or (mods:role/mods:roleTerm='thesis advisor')]" mode="utk_ir_MODS">
