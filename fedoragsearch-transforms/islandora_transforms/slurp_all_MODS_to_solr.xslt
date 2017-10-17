@@ -81,19 +81,6 @@
     </field>
   </xsl:template>
 
-  <!-- JIRA TRAC-876 Define utk_mods_etd_author_orcid in Solr -->
-  <!-- the following template creates an _s field for single orcid -->
-  <!-- valueURI="http://orcid.org/1234-5678-3333-6666" -->
-  <!-- first draft, orcidvalue may need more parsing -->
-
-    <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Author') or (mods:role/mods:roleTerm='author')][@type='orcid']" mode="utk_mods_etd">
-        <xsl:variable name="orcidvalue" select="@valueURI" />
-	 <xsl:variable name="orcid" select="translate($orcidvalue,'http://orcid.org/','')"/>
-         <field name="utk_etd_mods_name_author_orcid_s">
-           <xsl:value-of select="orcid"/>
-         </field>
-    </xsl:template>
-					    
 
   <!-- utk_mods_etd mode -->
   <!-- utk_mods_etd mode -->
@@ -107,7 +94,7 @@
     <xsl:variable name="family-n" select="mods:namePart[@type='family']"/>
     <xsl:variable name="t-o-address" select="mods:namePart[@type='termsOfAddress']"/>
 
-    <field name="utk_etd_mods_name_author_s">
+    <field name="utk_mods_etd_author_s">
       <xsl:choose>
         <xsl:when test="$t-o-address!=''">
           <xsl:value-of select="concat($given-n, ' ', $family-n, ', ', $t-o-address)"/>
