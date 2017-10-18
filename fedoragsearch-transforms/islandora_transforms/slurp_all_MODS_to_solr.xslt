@@ -55,15 +55,13 @@
     </field>
   </xsl:template>
 
-  <!-- utk_mods_etd mode -->
-  <!-- utk_mods_etd mode --> 
 
 
   <!-- JIRA TRAC-875 Define utk_mods_etd_author in Solr -->
   <!-- the following template creates an _s field for single etd author -->
   <!-- need to  use single_valued_hashset -->
   <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Author') or 
-    (mods:role/mods:roleTerm='author')]" mode="utk_mods_etd">
+    (mods:role/mods:roleTerm='author')]" mode="utk_ir_MODS">
     <xsl:variable name="given-n" select="mods:namePart[@type='given']"/>
     <xsl:variable name="family-n" select="mods:namePart[@type='family']"/>
     <xsl:variable name="t-o-address" select="mods:namePart[@type='termsOfAddress']"/>
