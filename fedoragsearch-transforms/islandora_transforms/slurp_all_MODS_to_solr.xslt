@@ -83,7 +83,7 @@
   </xsl:template>
 
   <!-- the following template adds a date_of_award field -->
-  <xsl:template match="mods:mods/mods:genre[@authority='COAR'][text()='thesis']" mode="utk_ir_MODS">
+  <xsl:template match="mods:mods/mods:genre[@authority='lcgft'][text()='Academic theses']" mode="utk_ir_MODS">
     <field name="utk_mods_etd_date_of_award_s">
       <xsl:value-of select="preceding-sibling::mods:originInfo/mods:dateIssued[@keyDate='yes'][@encoding='edtf']"/>
     </field>
