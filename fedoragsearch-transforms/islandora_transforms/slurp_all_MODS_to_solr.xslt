@@ -61,8 +61,6 @@
   </xsl:template>
 
 
-  <!-- utk_mods_etd  -->
-  <!-- utk_mods_etd  -->
 
   
 
