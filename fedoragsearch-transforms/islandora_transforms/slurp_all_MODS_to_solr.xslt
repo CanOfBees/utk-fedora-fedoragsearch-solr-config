@@ -34,7 +34,6 @@
       mods:genre = 'Academic theses'.
     -->
     <xsl:apply-templates mode="utk_ir_MODS" select="$content//mods:mods[1]"/>
-	<xsl:apply-templates mode="utk_mods_etd" select="$content//mods:mods[1]"/>
   </xsl:template>
 
   <!-- utk_ir_MODS mode -->
