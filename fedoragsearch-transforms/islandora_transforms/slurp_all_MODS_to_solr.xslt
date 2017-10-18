@@ -72,10 +72,10 @@
      <field name="utk_etd_mods_name_author_s">
        <xsl:choose>
           <xsl:when test="$t-o-address!=''">
-               <xsl:value-of select="concat($given-n, ' ', $family-n, ', ', $t-o-address)"/>
+               <xsl:value-of select="concat($given-n, ', ', $family-n, ', ', $t-o-address)"/>
         </xsl:when>
         <xsl:otherwise>
-              <xsl:value-of select="concat($given-n, ' ', $family-n)"/>
+              <xsl:value-of select="concat($given-n, ', ', $family-n)"/>
         </xsl:otherwise>
         </xsl:choose>
     </field>
