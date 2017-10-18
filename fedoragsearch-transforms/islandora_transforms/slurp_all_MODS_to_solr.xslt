@@ -73,6 +73,13 @@
     </field>
   </xsl:template>
 
+  <!-- the following template adds a date_of_award field -->
+  <xsl:template match="mods:mods/mods:genre[@authority='coar']" mode="utk_ir_MODS">
+    <field name="utk_mods_ir_publication_s">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+
   <!-- the following template creates a utk_mods_etd abstract field for all abstracts, in case there are multiple -->
   <xsl:template match="mods:mods/mods:abstract" mode="utk_ir_MODS">
     <field name="utk_mods_etd_abstract_ms">
