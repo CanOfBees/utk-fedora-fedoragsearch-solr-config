@@ -57,6 +57,17 @@
       </xsl:otherwise>
         </xsl:choose>
     </field>
+
+    <-- JIRA TRAC-876 Define utk_mods_etd_author_orcid in Solr -->
+
+    <xsl:if test="mods:name[@type='orcid']">
+        <xsl:variable name="orcidtrim" select="substring-after(mods:name[@valueURI],'http://orcid.org/')"/>
+
+        <field name="utk_mods_etd_author_orcid_s">
+            <xsl:value-of select="$orcidtrim"/>
+        </field>
+    </xsl:if>
+
   </xsl:template>
 
 
