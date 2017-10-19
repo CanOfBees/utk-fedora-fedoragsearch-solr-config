@@ -40,15 +40,14 @@
 
 
   <!-- JIRA TRAC-875 Define utk_mods_etd_name_author_ms in Solr -->
-  <!-- the following template creates an _s field for single etd author -->
-  <!-- need to  use single_valued_hashset -->
+  <!-- the following template creates an _ms field for single etd author -->
   <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Author') or 
     (mods:role/mods:roleTerm='author')]" mode="utk_ir_MODS">
     <xsl:variable name="given-n" select="mods:namePart[@type='given']"/>
     <xsl:variable name="family-n" select="mods:namePart[@type='family']"/>
     <xsl:variable name="t-o-address" select="mods:namePart[@type='termsOfAddress']"/>
 
-     <field name="utk_mods_name_author_ms">
+     <field name="utk_mods_etd_name_author_ms">
        <xsl:choose>
           <xsl:when test="$t-o-address!=''">
                <xsl:value-of select="concat($family-n, ', ', $given-n, ', ', $t-o-address)"/>
