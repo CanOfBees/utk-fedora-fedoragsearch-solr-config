@@ -64,6 +64,29 @@
     </field>
   </xsl:template>
 
+
+  <!-- the following template creates an _ms field for committee members -->
+  <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Committee member') or 
+    (mods:role/mods:roleTerm='committee member')]" mode="utk_ir_MODS">
+
+    <xsl:for-each>
+      <xsl:variable name="given-n" select="mods:namePart[@type='given']"/>
+      <xsl:variable name="family-n" select="mods:namePart[@type='family']"/>
+      <xsl:variable name="t-o-address" select="mods:namePart[@type='termsOfAddress']"/>
+
+      <field name="utk_mods_etd_committee_member_ms">  
+          <xsl:choose>
+             <xsl:when test="$t-o-address!=''">
+                <xsl:value-of select="concat($family-n, ', ', $given-n, ', ', $t-o-address)"/>
+             </xsl:when>
+             <xsl:otherwise>
+                <xsl:value-of select="concat($family-n, ', ', $given-n)"/>
+             </xsl:otherwise>
+          </xsl:choose>
+      </field>
+    </xsl:for-each>
+</xsl:template>
+
   <!-- the following template creates an _ms field for committee members -->
   <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Committee member') or (mods:role/mods:roleTerm='Committee Member')]" mode="utk_ir_MODS">
     <xsl:variable name="comm-member" select="mods:displayForm"/>
