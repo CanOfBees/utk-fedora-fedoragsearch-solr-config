@@ -73,7 +73,7 @@
     </field>
   </xsl:template>
 
-  <!-- the following template adds a date_of_award field -->
+  <!-- the following template adds a utk_mods_ir_publication field -->
   <xsl:template match="mods:mods/mods:genre[@authority='coar']" mode="utk_ir_MODS">
     <field name="utk_mods_ir_publication_s">
       <xsl:value-of select="normalize-space(.)"/>
