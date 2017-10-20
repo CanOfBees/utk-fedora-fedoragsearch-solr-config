@@ -60,8 +60,8 @@
     </field>
 
 
-    <xsl:if test="/mods:mods/mods:name[@authority='orcid']">
-        <xsl:variable name="orcidtrim" select="substring-after(/mods:mods/mods:name[@valueURI],'http://orcid.org/')"/>
+    <xsl:if test="@authority='orcid'">
+        <xsl:variable name="orcidtrim" select="substring-after(@valueURI,'http://orcid.org/')"/>
 
         <field name="utk_mods_etd_author_orcid_s">
             <xsl:value-of select="$orcidtrim"/>
