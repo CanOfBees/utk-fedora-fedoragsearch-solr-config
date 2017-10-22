@@ -69,7 +69,7 @@
   <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Committee member') or 
     (mods:role/mods:roleTerm='committee member')]" mode="utk_ir_MODS">
 
-    <xsl:for-each>
+    <xsl:for-each select=".">
       <xsl:variable name="given-n" select="mods:namePart[@type='given']"/>
       <xsl:variable name="family-n" select="mods:namePart[@type='family']"/>
       <xsl:variable name="t-o-address" select="mods:namePart[@type='termsOfAddress']"/>
