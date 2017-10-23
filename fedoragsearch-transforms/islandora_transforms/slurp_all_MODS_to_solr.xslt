@@ -73,6 +73,13 @@
     </field>
   </xsl:template>
 
+  <!-- the following template creates a Supplied Title field -->
+  <xsl:template match="mods:mods/mods:titleInfo[@supplied='yes']/mods:title" mode="utk_MODS">
+    <field name="utk_mods_supplied_title_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+
   <!-- the following template creates an archivalCollection+archivalIdentifier _ms field -->
   <xsl:template match="mods:mods/mods:relatedItem[@type='host'][@displayLabel='Collection']" mode="utk_MODS">
     <xsl:variable name="vColl" select="child::mods:titleInfo/mods:title"/>
