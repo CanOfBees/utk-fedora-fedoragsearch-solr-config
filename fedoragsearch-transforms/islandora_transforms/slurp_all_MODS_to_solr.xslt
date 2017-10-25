@@ -33,7 +33,8 @@
       mods:genre = 'Academic theses'.
     -->
     <xsl:apply-templates mode="utk_MODS" select="$content//mods:mods[1]"/>
-
+  </xsl:template>
+  
   <!--
     additional templating for our MODS name/roles and geographic terms/coordinates
   -->
