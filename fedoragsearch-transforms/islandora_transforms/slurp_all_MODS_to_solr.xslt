@@ -42,10 +42,9 @@
     <xsl:variable name="given-n" select="mods:namePart[@type='given']"/>
     <xsl:variable name="family-n" select="mods:namePart[@type='family']"/>
     <xsl:variable name="t-o-address" select="mods:namePart[@type='termsOfAddress']"/>
-       <xsl:variable name="display-f" select="mods:displayForm" />
+    <xsl:variable name="display-f" select="mods:displayForm" />
 
     <field name="utk_mods_etd_name_author_ms">
-
 
     <xls:when test="$family-n!="">
       <xsl:choose>
@@ -96,14 +95,6 @@
 </xsl:template>
 
 
-  <!-- the following template creates an _ms field for committee members -->
-  <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Committee member') or (mods:role/mods:roleTerm='committee Member')]" mode="utk_ir_MODS">
-    <xsl:variable name="comm-member" select="mods:displayForm"/>
-
-    <field name="utk_mods_etd_name_committee_member_ms">
-      <xsl:value-of select="$comm-member"/>
-    </field>
-  </xsl:template>
 
   <!-- the following template creates a utk_mods_etd abstract field for all abstracts, in case there are multiple -->
   <xsl:template match="mods:mods/mods:abstract" mode="utk_ir_MODS">
