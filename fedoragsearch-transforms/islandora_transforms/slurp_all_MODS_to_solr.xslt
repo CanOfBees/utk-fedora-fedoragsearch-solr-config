@@ -42,8 +42,12 @@
     <xsl:variable name="given-n" select="mods:namePart[@type='given']"/>
     <xsl:variable name="family-n" select="mods:namePart[@type='family']"/>
     <xsl:variable name="t-o-address" select="mods:namePart[@type='termsOfAddress']"/>
+       <xsl:variable name="display-f" select="mods:displayForm" />
 
     <field name="utk_mods_etd_name_author_ms">
+
+
+    <xls:when test="$family-n!="">
       <xsl:choose>
         <xsl:when test="$t-o-address!=''">
           <xsl:value-of select="concat($given-n, ' ', $family-n, ', ', $t-o-address)"/>
@@ -52,6 +56,11 @@
           <xsl:value-of select="concat($given-n, ' ', $family-n)"/>
         </xsl:otherwise>
       </xsl:choose>
+      </xsl:when>
+      <xls:otherwise>
+	    <xsl:value-of select="$display-f"/>
+      </xls:otherwise>
+
     </field>
   </xsl:template>
 
