@@ -6,13 +6,14 @@
   xmlns:foxml="info:fedora/fedora-system:def/foxml#"
   xmlns:mods="http://www.loc.gov/mods/v3"
      exclude-result-prefixes="mods java">
-  <xsl:include href="library/xslt-date-template.xslt"/>
-
+  <!-- <xsl:include href="/vhosts/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/config/index/FgsIndex/islandora_transforms/library/xslt-date-template.xslt"/>-->
+  <xsl:include href="/vhosts/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms/library/xslt-date-template.xslt"/>
+  <!-- <xsl:include href="/vhosts/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/config/index/FgsIndex/islandora_transforms/manuscript_finding_aid.xslt"/> -->
+  <xsl:include href="/vhosts/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms/manuscript_finding_aid.xslt"/>
   <!-- HashSet to track single-valued fields. -->
   <xsl:variable name="single_valued_hashset" select="java:java.util.HashSet.new()"/>
 
-  <!-- this is now geared towards an individual MODS record -->
-  <xsl:template match="/" name="index_MODS">
+  <xsl:template match="foxml:datastream[@ID='MODS']/foxml:datastreamVersion[last()]" name="index_MODS">
     <xsl:param name="content"/>
     <xsl:param name="prefix"></xsl:param>
     <xsl:param name="suffix">ms</xsl:param>
@@ -20,191 +21,65 @@
     <!-- Clearing hash in case the template is ran more than once. -->
     <xsl:variable name="return_from_clear" select="java:clear($single_valued_hashset)"/>
 
-    <doc>
-      <xsl:apply-templates mode="slurping_MODS" select="$content//mods:mods[1]">
-        <xsl:with-param name="prefix" select="$prefix"/>
-        <xsl:with-param name="suffix" select="$suffix"/>
-        <xsl:with-param name="pid" select="../../@PID"/>
-        <xsl:with-param name="datastream" select="../@ID"/>
-      </xsl:apply-templates>
+    <xsl:apply-templates mode="slurping_MODS" select="$content//mods:mods[1]">
+      <xsl:with-param name="prefix" select="$prefix"/>
+      <xsl:with-param name="suffix" select="$suffix"/>
+      <xsl:with-param name="pid" select="../../@PID"/>
+      <xsl:with-param name="datastream" select="../@ID"/>
+    </xsl:apply-templates>
 
-      <!--
-        creates a mode for MODS records that do *not* have a mods:identifer starting with 'utk_' *AND* do *not* have a
-        mods:genre = 'Academic theses'.
-      -->
-      <xsl:apply-templates mode="utk_MODS"
-                           select="$content//mods:mods[1][(not(starts-with(mods:identifier, 'utk_'))) and (not(mods:genre[@authority='lcgft'][@valueURI='http://id.loc.gov/authorities/genreForms/gf2014026039']='Academic theses'))]"/>
 
-      <!--
-        creates a mode for MODS record that *do* have a mods:identifier starting with 'utk_' (migration data!) *OR* a
-        mods:genre = 'Academic theses'.
-      -->
-      <xsl:apply-templates mode="utk_ir_MODS"
-                           select="$content//mods:mods[1][(starts-with(mods:identifier, 'utk_')) or (mods:genre[@authority='lcgft'][@valueURI='http://id.loc.gov/authorities/genreForms/gf2014026039']='Academic theses')]"/>
-    </doc>
-
-  </xsl:template>
-
-  <!--
-    additional templating for our MODS name/roles and geographic terms/coordinates
-  -->
-  <!-- the following template creates an _ms name+role field -->
-  <xsl:template match="mods:mods/mods:name" mode="utk_MODS">
-    <xsl:variable name="vName" select="child::mods:namePart"/>
-    <xsl:variable name="vRole">
-      <xsl:if test="child::mods:role/mods:roleTerm">
-        <xsl:text>(</xsl:text>
-        <xsl:for-each select="child::mods:role/mods:roleTerm">
-          <xsl:value-of select="."/>
-          <xsl:if test="not(position()=last())">,</xsl:if>
-        </xsl:for-each>
-        <xsl:text>)</xsl:text>
-      </xsl:if>
-    </xsl:variable>
-
-    <field name="utk_mods_name_role_ms">
-      <xsl:choose>
-        <xsl:when test="$vRole=''">
-          <xsl:value-of select="$vName"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="concat($vName,' ',$vRole)"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </field>
-  </xsl:template>
-
-  <!-- the following template creates a geoSubject+coordinates _ms field-->
-  <xsl:template match="mods:mods/mods:subject[mods:geographic][mods:cartographics]" mode="utk_MODS">
-    <xsl:variable name="vGeo" select="child::mods:geographic"/>
-    <xsl:variable name="vCoords" select="child::mods:cartographics/mods:coordinates"/>
-
-    <field name="utk_mods_geo_coords_ms">
-      <xsl:value-of select="concat($vGeo,' ','(',$vCoords,')')"/>
-    </field>
-  </xsl:template>
-
-  <!-- the following template creates an archivalCollection+archivalIdentifier _ms field -->
-  <xsl:template match="mods:mods/mods:relatedItem[@type='host'][@displayLabel='Collection']" mode="utk_MODS">
-    <xsl:variable name="vColl" select="child::mods:titleInfo/mods:title"/>
-    <xsl:variable name="vArchivalID">
-      <xsl:if test="child::mods:identifier[@type='local']">
-        <xsl:value-of select="child::mods:identifier"/>
-      </xsl:if>
-    </xsl:variable>
-
-    <field name="utk_mods_archColl_archID_ms">
-      <xsl:choose>
-        <xsl:when test="$vArchivalID=''">
-          <xsl:value-of select="$vColl"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="concat($vColl,', ',$vArchivalID)"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </field>
-  </xsl:template>
-
-  <!-- subjects! -->
-  <!-- the following template creates a simplified topical subject _ms field -->
-  <!--
-    note: this is *very* generic; it grabs all mods:subjects with an @authority,
-    so we may want to add some specificity in here at some point. maybe.
-  -->
-  <xsl:template match="mods:mods/mods:subject[@authority]" mode="utk_MODS">
     <!--
-       dots = Database of the Smokies
-       lcsh = Library of Congress
-       fast = FAST
-       local = Local Thang
-     -->
-    <xsl:variable name="vAuthority">
-      <xsl:choose>
-        <xsl:when test="self::node()/@authority='dots'">
-          <xsl:value-of select="'Database of the Smokies'"/>
-        </xsl:when>
-        <xsl:when test="self::node()/@authority='lcsh'">
-          <xsl:value-of select="'Library of Congress'"/>
-        </xsl:when>
-        <xsl:when test="self::node()/@authority='fast'">
-          <xsl:value-of select="'FAST'"/>
-        </xsl:when>
-        <xsl:when test="self::node()/@authority='local'">
-          <xsl:value-of select="'Local Subject Heading'"/>
-        </xsl:when>
-      </xsl:choose>
-    </xsl:variable>
-
-    <field name="utk_mods_subject_topic_ms">
-      <xsl:value-of select="normalize-space(concat(.,' ','(',$vAuthority,')'))"/>
-    </field>
-  </xsl:template>
-
-  <!-- the following templates creates a simplified Volunteer Voices subject _ms field -->
-  <!--
-    one for each:
-    Volunteer Voices Curriculum Topics
-    Broad Topics
-    Tennessee Social Studies K-12 Eras in American History
-  -->
-  <xsl:template match="mods:mods/mods:subject[@displayLabel='Volunteer Voices Curriculum Topics']" mode="utk_MODS">
-    <field name="utk_mods_subject_topic_curriculumTopics_ms">
-      <xsl:value-of select="normalize-space(concat(.,' ','(','Volunteer Voices',')'))"/>
-    </field>
-  </xsl:template>
-  <xsl:template match="mods:mods/mods:subject[@displayLabel='Broad Topics']" mode="utk_MODS">
-    <field name="utk_mods_subject_topic_broadTopics_ms">
-      <xsl:value-of select="normalize-space(concat(.,' ','(','Volunteer Voices',')'))"/>
-    </field>
-  </xsl:template>
-  <xsl:template match="mods:mods/mods:subject[@displayLabel='Tennessee Social Studies K-12 Eras in American History']"
-                mode="utk_MODS">
-    <field name="utk_mods_subject_topic_socStudiesK12_ms">
-      <xsl:value-of select="normalize-space(concat(.,' ','(','Volunteer Voices',')'))"/>
-    </field>
-  </xsl:template>
-
-  <!-- the following template creates an _ms field for accessCondition+attributes -->
-  <xsl:template match="mods:mods/mods:accessCondition[@type='use and reproduction']">
-    <field name="utk_mods_accessCondition_ms">
-      <xsl:value-of select="normalize-space(concat(.,' ','(','useAndReproduction',')'))"/>
-    </field>
-  </xsl:template>
-
-  <!-- the following template creates an _ms field for abstract(s) -->
-  <!-- pulls all all mods:abstracts into one _ms field. maybe overly greedy? -->
-  <xsl:template match="mods:mods/mods:abstract" mode="utk_MODS">
-    <field name="utk_mods_abstract_ms">
-      <xsl:for-each select=".">
-        <xsl:value-of select="concat(.,' ')"/>
-      </xsl:for-each>
-    </field>
+      creates a mode for MODS record that *do* have a mods:identifier starting with 'utk_' (migration data!) *OR* a
+      mods:genre = 'Academic theses'.
+    -->
+    <xsl:apply-templates mode="utk_ir_MODS" select="$content//mods:mods[1]"/>
   </xsl:template>
 
   <!-- utk_ir_MODS mode -->
-  <!-- the following template creates an _ms field for author(s) -->
-  <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Author') or (mods:role/mods:roleTerm='author')]" mode="utk_ir_MODS">
+
+
+  <!-- JIRA TRAC-875 Define utk_mods_etd_name_author_ms in Solr -->
+  <!-- the following template creates an _ms field for single etd author -->
+  <!-- and a _s field for the orcid associated with that etd author -->
+  <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Author') or 
+    (mods:role/mods:roleTerm='author')]" mode="utk_ir_MODS">
     <xsl:variable name="given-n" select="mods:namePart[@type='given']"/>
     <xsl:variable name="family-n" select="mods:namePart[@type='family']"/>
     <xsl:variable name="t-o-address" select="mods:namePart[@type='termsOfAddress']"/>
 
-    <field name="utk_ir_mods_name_author_ms">
-      <xsl:choose>
-        <xsl:when test="$t-o-address!=''">
-          <xsl:value-of select="concat($given-n, ' ', $family-n, ', ', $t-o-address)"/>
+     <field name="utk_mods_etd_name_author_ms">
+       <xsl:choose>
+          <xsl:when test="$t-o-address!=''">
+               <xsl:value-of select="concat($family-n, ', ', $given-n, ', ', $t-o-address)"/>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:value-of select="concat($given-n, ' ', $family-n)"/>
-        </xsl:otherwise>
-      </xsl:choose>
+              <xsl:value-of select="concat($family-n, ', ', $given-n)"/>
+      </xsl:otherwise>
+        </xsl:choose>
     </field>
+
+
+    <xsl:if test="@authority='orcid'">
+        <xsl:variable name="orcidtrim" select="substring-after(@valueURI,'http://orcid.org/')"/>
+
+        <field name="utk_mods_etd_author_orcid_s">
+            <xsl:value-of select="$orcidtrim"/>
+        </field>
+    </xsl:if>
+
   </xsl:template>
+
+
+
+  
+
 
   <!-- the following template creates an _ms field for thesis advisors -->
   <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Thesis advisor') or (mods:role/mods:roleTerm='thesis advisor')]" mode="utk_ir_MODS">
     <xsl:variable name="advisor" select="mods:displayForm"/>
 
-    <field name="utk_ir_mods_name_thesis_advisor_ms">
+    <field name="utk_mods_etd_name_thesis_advisor_ms">
       <xsl:value-of select="$advisor"/>
     </field>
   </xsl:template>
@@ -213,17 +88,31 @@
   <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Committee member') or (mods:role/mods:roleTerm='Committee Member')]" mode="utk_ir_MODS">
     <xsl:variable name="comm-member" select="mods:displayForm"/>
 
-    <field name="utk_ir_mods_name_committee_member_ms">
+    <field name="utk_mods_etd_name_committee_member_ms">
       <xsl:value-of select="$comm-member"/>
     </field>
   </xsl:template>
 
-  <!-- the following template creates a utk_ir_mods abstract field for all abstracts, in case there are multiple -->
+  <!-- the following template adds a utk_mods_ir_publication field -->
+  <xsl:template match="mods:mods/mods:genre[@authority='coar']" mode="utk_ir_MODS">
+    <field name="utk_mods_ir_publication_s">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+
+  <!-- the following template creates a utk_mods_etd abstract field for all abstracts, in case there are multiple -->
   <xsl:template match="mods:mods/mods:abstract" mode="utk_ir_MODS">
-    <field name="utk_ir_mods_abstract_ms">
+    <field name="utk_mods_etd_abstract_ms">
       <xsl:for-each select=".">
         <xsl:value-of select="concat(., ' ')"/>
       </xsl:for-each>
+    </field>
+  </xsl:template>
+
+  <!-- the following template adds a date_of_award field -->
+  <xsl:template match="mods:mods/mods:genre[@authority='lcgft'][text()='Academic theses']" mode="utk_ir_MODS">
+    <field name="utk_mods_etd_date_of_award_s">
+      <xsl:value-of select="preceding-sibling::mods:originInfo/mods:dateIssued[@keyDate='yes'][@encoding='edtf']"/>
     </field>
   </xsl:template>
 
