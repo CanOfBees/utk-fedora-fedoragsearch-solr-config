@@ -76,7 +76,7 @@
        <xsl:variable name="display-f" select="mods:displayForm" />
 
       <field name="utk_mods_etd_committee_member_ms">  
-	  <xls:choose>
+
 	     <xls:when test="$family-n!="">
 		<xls:choose>
              	   <xsl:when test="$t-o-address!=''">
@@ -90,7 +90,7 @@
 	    <xls:otherwise>
 		    <xsl:value-of select="$display-f"/>
 	    </xls:otherwise>
-          </xsl:choose>
+	    
       </field>
     </xsl:for-each>
 </xsl:template>
