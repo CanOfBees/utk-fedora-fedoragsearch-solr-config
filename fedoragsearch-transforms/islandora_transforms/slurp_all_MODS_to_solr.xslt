@@ -46,7 +46,7 @@
 
     <field name="utk_mods_etd_name_author_ms">
 
-    <xsl:when test="$family-n!="">
+    <xsl:when test="$family-n!=''">
       <xsl:choose>
         <xsl:when test="$t-o-address!=''">
           <xsl:value-of select="concat($given-n, ' ', $family-n, ', ', $t-o-address)"/>
@@ -76,7 +76,7 @@
 
       <field name="utk_mods_etd_committee_member_ms">  
 
-	     <xsl:when test="$family-n!="">
+	     <xsl:when test="$family-n!=''">
 		<xsl:choose>
              	   <xsl:when test="$t-o-address!=''">
                       <xsl:value-of select="concat($family-n, ', ', $given-n, ', ', $t-o-address)"/>
