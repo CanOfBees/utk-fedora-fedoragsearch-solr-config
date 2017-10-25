@@ -46,7 +46,7 @@
 
     <field name="utk_mods_etd_name_author_ms">
 
-    <xls:when test="$family-n!="">
+    <xsl:when test="$family-n!="">
       <xsl:choose>
         <xsl:when test="$t-o-address!=''">
           <xsl:value-of select="concat($given-n, ' ', $family-n, ', ', $t-o-address)"/>
@@ -56,9 +56,9 @@
         </xsl:otherwise>
       </xsl:choose>
       </xsl:when>
-      <xls:otherwise>
+      <xsl:otherwise>
 	    <xsl:value-of select="$display-f"/>
-      </xls:otherwise>
+      </xsl:otherwise>
 
     </field>
   </xsl:template>
@@ -76,19 +76,19 @@
 
       <field name="utk_mods_etd_committee_member_ms">  
 
-	     <xls:when test="$family-n!="">
-		<xls:choose>
+	     <xsl:when test="$family-n!="">
+		<xsl:choose>
              	   <xsl:when test="$t-o-address!=''">
                       <xsl:value-of select="concat($family-n, ', ', $given-n, ', ', $t-o-address)"/>
                    </xsl:when>
                    <xsl:otherwise>
                       <xsl:value-of select="concat($family-n, ', ', $given-n)"/>
                    </xsl:otherwise>
-	        </xls:choose>
-	    </xls:when>
-	    <xls:otherwise>
+	        </xsl:choose>
+	    </xsl:when>
+	    <xsl:otherwise>
 		    <xsl:value-of select="$display-f"/>
-	    </xls:otherwise>
+	    </xsl:otherwise>
 	    
       </field>
     </xsl:for-each>
