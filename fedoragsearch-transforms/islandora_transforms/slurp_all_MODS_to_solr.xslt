@@ -64,15 +64,6 @@
     </field>
   </xsl:template>
 
-  <!-- the following template creates an _ms field for thesis advisors -->
-  <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Thesis advisor') or (mods:role/mods:roleTerm='thesis advisor')]" mode="utk_ir_MODS">
-    <xsl:variable name="advisor" select="mods:displayForm"/>
-
-    <field name="utk_mods_etd_name_thesis_advisor_ms">
-      <xsl:value-of select="$advisor"/>
-    </field>
-  </xsl:template>
-
 
   <!-- the following template creates an _ms field for committee members -->
   <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Committee member') or 
