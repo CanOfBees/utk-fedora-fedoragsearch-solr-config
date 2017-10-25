@@ -75,7 +75,7 @@
        <xsl:variable name="display-f" select="mods:displayForm" />
 
       <field name="utk_mods_etd_committee_member_ms">  
-
+           <xsl:choose>
 	     <xsl:when test="$family-n!=''">
 		<xsl:choose>
              	   <xsl:when test="$t-o-address!=''">
@@ -89,10 +89,12 @@
 	    <xsl:otherwise>
 		    <xsl:value-of select="$display-f"/>
 	    </xsl:otherwise>
+    </xsl:choose>
 	    
       </field>
     </xsl:for-each>
 </xsl:template>
+
 
 
 
