@@ -60,8 +60,17 @@
 	    <xsl:value-of select="$display-f"/>
       </xsl:otherwise>
      </xsl:choose>
-
     </field>
+
+
+       <xsl:if test="@authority='orcid'">
+           <xsl:variable name="orcidtrim" select="substring-after(@valueURI,'http://orcid.org/')"/>
+           <field name="utk_mods_etd_author_orcid_s">
+	        <xsl:value-of select="$orcidtrim"/>
+	   </field>
+	</xsl:if>
+
+
   </xsl:template>
 
 
