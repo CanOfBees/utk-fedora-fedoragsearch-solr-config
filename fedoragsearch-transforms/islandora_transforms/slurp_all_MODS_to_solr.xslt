@@ -41,6 +41,8 @@
 
   <!-- JIRA TRAC-875 Define utk_mods_etd_name_author_ms in Solr -->
   <!-- the following template creates an _ms field for single etd author -->
+  <!-- and a _s field for the orcid associated with that etd author -->
+
   <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Author') or 
     (mods:role/mods:roleTerm='author')]" mode="utk_ir_MODS">
     <xsl:variable name="given-n" select="mods:namePart[@type='given']"/>
@@ -57,6 +59,15 @@
       </xsl:otherwise>
         </xsl:choose>
     </field>
+
+
+    <xsl:if test="@authority='orcid'">
+        <xsl:variable name="orcidtrim" select="substring-after(@valueURI,'http://orcid.org/')"/>
+        <field name="utk_mods_etd_author_orcid_s">
+            <xsl:value-of select="$orcidtrim"/>
+        </field>
+    </xsl:if>
+
   </xsl:template>
 
 
