@@ -107,6 +107,42 @@
 
 
 
+<!-- the following template creates an _ms field for thesis advisors -->
+<xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Thesis advisor') or 
+	(mods:role/mods:roleTerm='thesis advisor')]" mode="utk_ir_MODS">
+
+	<xsl:for-each select=".">
+		<xsl:variable name="given-n" select="mods:namePart[@type='given']"/>
+		<xsl:variable name="family-n" select="mods:namePart[@type='family']"/>
+		<xsl:variable name="t-o-address" select="mods:namePart[@type='termsOfAddress']"/>
+		<xsl:variable name="display-f" select="mods:displayForm" />
+
+
+		<field name="utk_mods_etd_thesis_advisor_ms">
+
+		<xsl:choose>
+			<xsl:when test="$family-n!=''">
+			<xsl:choose>
+		 	  <xsl:when test="$t-o-address!=''">
+			    <xsl:value-of select="concat($family-n, ', ', $given-n, ', ', $t-o-address)"/>
+			  </xsl:when>
+			  <xsl:otherwise>
+			    <xsl:value-of select="concat($family-n, ', ', $given-n)"/>
+			  </xsl:otherwise>
+			</xsl:choose> 
+			</xsl:when>
+			<xsl:otherwise>
+			    <xsl:value-of select="$display-f"/>
+			</xsl:otherwise>
+		</xsl:choose>
+
+ 	        </field>
+       </xsl:for-each>
+</xsl:template>
+
+
+
+
 
   <!-- the following template creates a utk_mods_etd abstract field for all abstracts, in case there are multiple -->
   <xsl:template match="mods:mods/mods:abstract" mode="utk_ir_MODS">
