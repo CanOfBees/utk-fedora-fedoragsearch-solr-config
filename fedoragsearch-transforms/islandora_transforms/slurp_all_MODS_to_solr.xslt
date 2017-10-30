@@ -39,9 +39,8 @@
   <!-- utk_ir_MODS mode -->
 
 
-  <!-- JIRA TRAC-875 Define utk_mods_etd_name_author_ms in Solr -->
   <!-- the following template creates an _ms field for single etd author -->
-  <!-- and a _s field for the orcid associated with that etd author -->
+  <!-- and an _s field for the orcid associated with that etd author -->
 
   <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Author') or 
     (mods:role/mods:roleTerm='author')]" mode="utk_ir_MODS">
@@ -60,14 +59,12 @@
         </xsl:choose>
     </field>
 
-
     <xsl:if test="@authority='orcid'">
-        <xsl:variable name="orcidtrim" select="substring-after(@valueURI,'http://orcid.org/')"/>
-        <field name="utk_mods_etd_author_orcid_s">
-            <xsl:value-of select="$orcidtrim"/>
+	<xsl:variable name="orcidtrim" select="substring-after(@valueURI,'http://orcid.org/')"/>
+	<field name="utk_mods_etd_author_orcid_s">
+	  <xsl:value-of select="$orcidtrim"/>
         </field>
     </xsl:if>
-
   </xsl:template>
 
 
@@ -77,6 +74,17 @@
 
   <!-- the following template creates an _ms field for thesis advisors -->
   <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Thesis advisor') or (mods:role/mods:roleTerm='thesis advisor')]" mode="utk_ir_MODS">
+    <xsl:variable name="advisor" select="mods:displayForm"/>
+
+    <field name="utk_mods_etd_name_thesis_advisor_ms">
+      <xsl:value-of select="$advisor"/>
+    </field>
+  </xsl:template>
+
+    <!-- the following template creates an _ms field for committee members -->
+   <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Committee member') or
+     (mods:role/mods:roleTerm='committee member')]" mode="utk_ir_MODS">
+
     <xsl:variable name="advisor" select="mods:displayForm"/>
 
     <field name="utk_mods_etd_name_thesis_advisor_ms">
@@ -419,17 +427,6 @@
         </xsl:attribute>
         <xsl:value-of select="$value"/>
       </field>
-    </xsl:if>
-    <xsl:if test="normalize-space($node/@authorityURI)">
-      <field>
-        <xsl:attribute name="name">
-          <xsl:value-of select="concat($prefix, 'authorityURI_', $suffix)"/>
-        </xsl:attribute>
-        <xsl:value-of select="$node/@authorityURI"/>
-      </field>
-    </xsl:if>
-
-    <xsl:apply-templates select="$node/*" mode="slurping_MODS">
       <xsl:with-param name="prefix" select="$prefix"/>
       <xsl:with-param name="suffix" select="$suffix"/>
       <xsl:with-param name="pid" select="$pid"/>
