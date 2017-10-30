@@ -38,10 +38,10 @@
 
   <!-- utk_ir_MODS mode -->
 
+
   <!-- JIRA TRAC-875 Define utk_mods_etd_name_author_ms in Solr -->
   <!-- the following template creates an _ms field for single etd author -->
-  <!-- and an _s field for the orcid associated with that etd author -->
-
+  <!-- and a _s field for the orcid associated with that etd author -->
   <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Author') or 
     (mods:role/mods:roleTerm='author')]" mode="utk_ir_MODS">
     <xsl:variable name="given-n" select="mods:namePart[@type='given']"/>
@@ -59,71 +59,68 @@
         </xsl:choose>
     </field>
 
-    <xsl:if test="@authority='orcid'">
-	<xsl:variable name="orcidtrim" select="substring-after(@valueURI,'http://orcid.org/')"/>
 
-	<field name="utk_mods_etd_author_orcid_s">
-	    <xsl:value-of select="$orcidtrim"/>
+    <xsl:if test="@authority='orcid'">
+        <xsl:variable name="orcidtrim" select="substring-after(@valueURI,'http://orcid.org/')"/>
+
+        <field name="utk_mods_etd_author_orcid_s">
+            <xsl:value-of select="$orcidtrim"/>
         </field>
     </xsl:if>
 
   </xsl:template>
 
 
-
-  
-
-
   <!-- the following template creates an _ms field for thesis advisors -->
-  <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Thesis advisor') or (mods:role/mods:roleTerm='thesis advisor')]" mode="utk_ir_MODS">
-    <xsl:variable name="advisor" select="mods:displayForm"/>
+  <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Thesis advisor') or 
+    (mods:role/mods:roleTerm='thesis advisor')]" mode="utk_ir_MODS">
 
-    <field name="utk_mods_etd_name_thesis_advisor_ms">
-      <xsl:value-of select="$advisor"/>
+    <xsl:for-each select=".">
+      <xsl:variable name="given-n" select="mods:namePart[@type='given']"/>
+      <xsl:variable name="family-n" select="mods:namePart[@type='family']"/>
+      <xsl:variable name="t-o-address" select="mods:namePart[@type='termsOfAddress']"/>
+      <xsl:variable name="display-f" select="mods:displayForm" />
+
+
+      <field name="utk_mods_etd_thesis_advisor_ms">  
+
+          <xsl:choose>
+  	     <xsl:when test="$family-n!=''">
+		     <xsl:choose>
+                     <xsl:when test="$t-o-address!=''">
+                           <xsl:value-of select="concat($family-n, ', ', $given-n, ', ', $t-o-address)"/>
+                     </xsl:when>
+                     <xsl:otherwise>
+	                   <xsl:value-of select="concat($family-n, ', ', $given-n)"/>
+		     </xsl:otherwise>
+	            </xsl:choose> 
+	     </xsl:when>
+	     <xsl:otherwise>
+	             <xsl:value-of select="$display-f"/>
+	     </xsl:otherwise>
+	  </xsl:choose>
+
+      </field>
+    </xsl:for-each>
+</xsl:template>
+
+
+
+  <!-- the following template creates an _ms field for committee members -->
+  <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Committee member') or (mods:role/mods:roleTerm='Committee Member')]" mode="utk_ir_MODS">
+    <xsl:variable name="comm-member" select="mods:displayForm"/>
+
+    <field name="utk_mods_etd_name_committee_member_ms">
+      <xsl:value-of select="$comm-member"/>
     </field>
   </xsl:template>
 
-    <!-- the following template creates an _ms field for committee members -->
-   <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Committee member') or
-     (mods:role/mods:roleTerm='committee member')]" mode="utk_ir_MODS">
-
-    <xsl:variable name="advisor" select="mods:displayForm"/>
-
-    <field name="utk_mods_etd_name_thesis_advisor_ms">
-      <xsl:value-of select="$advisor"/>
+  <!-- the following template adds a utk_mods_ir_publication field -->
+  <xsl:template match="mods:mods/mods:genre[@authority='coar']" mode="utk_ir_MODS">
+    <field name="utk_mods_ir_publication_s">
+      <xsl:value-of select="normalize-space(.)"/>
     </field>
   </xsl:template>
-
-    <!-- the following template creates an _ms field for committee members -->
-   <xsl:template match="mods:mods/mods:name[(mods:role/mods:roleTerm='Committee member') or
-     (mods:role/mods:roleTerm='committee member')]" mode="utk_ir_MODS">
-
-     <xsl:for-each select=".">
-       <xsl:variable name="given-n" select="mods:namePart[@type='given']"/>
-       <xsl:variable name="family-n" select="mods:namePart[@type='family']"/>
-       <xsl:variable name="t-o-address" select="mods:namePart[@type='termsOfAddress']"/>
-        <xsl:variable name="display-f" select="mods:displayForm" />
-
-       <field name="utk_mods_etd_committee_member_ms">
-            <xsl:choose>
-              <xsl:when test="$family-n!=''">
-                 <xsl:choose>
-                    <xsl:when test="$t-o-address!=''">
-                       <xsl:value-of select="concat($family-n, ', ', $given-n, ', ', $t-o-address)"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                       <xsl:value-of select="concat($family-n, ', ', $given-n)"/>
-                    </xsl:otherwise>
-                 </xsl:choose>
-             </xsl:when>
-             <xsl:otherwise>
-                     <xsl:value-of select="$display-f"/>
-             </xsl:otherwise>
-     </xsl:choose>
-
-       </field>
-     </xsl:for-each>
- </xsl:template>
 
   <!-- the following template creates a utk_mods_etd abstract field for all abstracts, in case there are multiple -->
   <xsl:template match="mods:mods/mods:abstract" mode="utk_ir_MODS">
@@ -429,6 +426,17 @@
         </xsl:attribute>
         <xsl:value-of select="$value"/>
       </field>
+    </xsl:if>
+    <xsl:if test="normalize-space($node/@authorityURI)">
+      <field>
+        <xsl:attribute name="name">
+          <xsl:value-of select="concat($prefix, 'authorityURI_', $suffix)"/>
+        </xsl:attribute>
+        <xsl:value-of select="$node/@authorityURI"/>
+      </field>
+    </xsl:if>
+
+    <xsl:apply-templates select="$node/*" mode="slurping_MODS">
       <xsl:with-param name="prefix" select="$prefix"/>
       <xsl:with-param name="suffix" select="$suffix"/>
       <xsl:with-param name="pid" select="$pid"/>
