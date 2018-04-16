@@ -7,9 +7,9 @@
   xmlns:mods="http://www.loc.gov/mods/v3"
      exclude-result-prefixes="mods java">
   <!-- <xsl:include href="/vhosts/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/config/index/FgsIndex/islandora_transforms/library/xslt-date-template.xslt"/>-->
-  <xsl:include href="/vhosts/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms/library/xslt-date-template.xslt"/>
+  <xsl:include href="/usr/share/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms/library/xslt-date-template.xslt"/>
   <!-- <xsl:include href="/vhosts/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/config/index/FgsIndex/islandora_transforms/manuscript_finding_aid.xslt"/> -->
-  <xsl:include href="/vhosts/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms/manuscript_finding_aid.xslt"/>
+  <xsl:include href="/usr/share/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms/manuscript_finding_aid.xslt"/>
   <!-- HashSet to track single-valued fields. -->
   <xsl:variable name="single_valued_hashset" select="java:java.util.HashSet.new()"/>
 
@@ -64,16 +64,22 @@
     </field>
   </xsl:template>
 
-  <!-- the following template creates a geoSubject+coordinates _ms field-->
-  <xsl:template match="mods:mods/mods:subject[mods:geographic][mods:cartographics]" mode="utk_MODS">
+  <!-- the following template creates a geoSubject+coordinates _ms field or just geoSubject_ms field-->
+  <xsl:template match="mods:mods/mods:subject[mods:geographic]" mode="utk_MODS">
     <xsl:variable name="vGeo" select="child::mods:geographic"/>
     <xsl:variable name="vCoords" select="child::mods:cartographics/mods:coordinates"/>
-
-    <field name="utk_mods_geo_coords_ms">
-      <xsl:value-of select="concat($vGeo,' ','(',$vCoords,')')"/>
+    <field name="utk_mods_geo_ms">
+      <xsl:choose>
+        <xsl:when test="$vCoords!=''">
+          <xsl:value-of select="concat($vGeo,' ','(',$vCoords,')')"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$vGeo"/>
+        </xsl:otherwise>
+      </xsl:choose>
     </field>
   </xsl:template>
-
+  
   <!-- the following template creates a Supplied Title field -->
   <xsl:template match="mods:mods/mods:titleInfo[@supplied='yes']/mods:title" mode="utk_MODS">
     <field name="utk_mods_supplied_title_ms">
