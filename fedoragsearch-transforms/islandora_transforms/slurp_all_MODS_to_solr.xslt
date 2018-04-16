@@ -40,7 +40,7 @@
   -->
   <!-- the following template creates an _ms name+role field -->
   <xsl:template match="mods:mods/mods:name" mode="utk_MODS">
-    <xsl:variable name="vName" select="child::mods:namePart"/>
+    <xsl:variable name="vName" select="child::mods:namePart[not(@type)]"/>
     <xsl:variable name="vRole">
       <xsl:if test="child::mods:role/mods:roleTerm">
         <xsl:text>(</xsl:text>
@@ -51,6 +51,18 @@
         <xsl:text>)</xsl:text>
       </xsl:if>
     </xsl:variable>
+    <xsl:variable name="vDate">
+      <xsl:if test="child::mods:namePart[@type='date']">
+        <xsl:text>, </xsl:text>
+        <xsl:value-of select="."/>
+      </xsl:if>
+    </xsl:variable>
+    <xsl:variable name="vDescripton">
+      <xsl:if test="child::mods:description">
+        <xsl:text>, </xsl:text>
+        <xsl:value-of select="."/>
+      </xsl:if>
+    </xsl:variable>
 
     <field name="utk_mods_name_role_ms">
       <xsl:choose>
@@ -58,7 +70,7 @@
           <xsl:value-of select="$vName"/>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:value-of select="concat($vName,' ',$vRole)"/>
+          <xsl:value-of select="concat($vName,$vDate,$vDescription,' ',$vRole)"/>
         </xsl:otherwise>
       </xsl:choose>
     </field>
