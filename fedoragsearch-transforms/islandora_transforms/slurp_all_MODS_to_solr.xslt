@@ -67,7 +67,7 @@
     <field name="utk_mods_name_role_ms">
       <xsl:choose>
         <xsl:when test="$vRole=''">
-          <xsl:value-of select="$vName"/>
+          <xsl:value-of select="concat($vName,$vDate,$vDescription)"/>
         </xsl:when>
         <xsl:otherwise>
           <xsl:value-of select="concat($vName,$vDate,$vDescription,' ',$vRole)"/>
