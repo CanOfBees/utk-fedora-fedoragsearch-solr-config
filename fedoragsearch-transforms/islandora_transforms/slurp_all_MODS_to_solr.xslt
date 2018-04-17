@@ -54,13 +54,13 @@
     <xsl:variable name="vDate">
       <xsl:if test="child::mods:namePart[@type='date']">
         <xsl:text>, </xsl:text>
-        <xsl:value-of select="."/>
+        <xsl:value-of select="child::mods:namePart[@type='date']"/>
       </xsl:if>
     </xsl:variable>
     <xsl:variable name="vDescripton">
       <xsl:if test="child::mods:description">
         <xsl:text>, </xsl:text>
-        <xsl:value-of select="."/>
+        <xsl:value-of select="child::mods:description"/>
       </xsl:if>
     </xsl:variable>
 
