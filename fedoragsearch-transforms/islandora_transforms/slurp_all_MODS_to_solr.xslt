@@ -57,7 +57,7 @@
         <xsl:value-of select="child::mods:namePart[@type='date']"/>
       </xsl:if>
     </xsl:variable>
-    <xsl:variable name="vDescripton">
+    <xsl:variable name="vDescription">
       <xsl:if test="child::mods:description">
         <xsl:text>, </xsl:text>
         <xsl:value-of select="child::mods:description"/>
