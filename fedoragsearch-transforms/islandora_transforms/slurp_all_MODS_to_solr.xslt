@@ -124,31 +124,31 @@
     <xsl:variable name="vAuthority">
       <xsl:choose>
         <xsl:when test="self::node()/@authority='dots'">
-          <xsl:value-of select="'Database of the Smokies'"/>
+          <xsl:value-of select="', (Database of the Smokies)'"/>
         </xsl:when>
         <xsl:when test="self::node()/@authority='lcsh'">
-          <xsl:value-of select="'Library of Congress Subject Headings'"/>
+          <xsl:value-of select="', (Library of Congress Subject Headings)'"/>
         </xsl:when>
         <xsl:when test="self::node()/@authority='fast'">
-          <xsl:value-of select="'FAST'"/>
+          <xsl:value-of select="', (FAST)'"/>
         </xsl:when>
         <xsl:when test="self::node()/@authority='local'">
-          <xsl:value-of select="'Local Subject Heading'"/>
+          <xsl:value-of select="', (Local Subject Heading)'"/>
         </xsl:when>
         <xsl:when test="self::node()/@authority='naf'">
-          <xsl:value-of select="'Library of Congress Name Authority File'"/>
+          <xsl:value-of select="', (Library of Congress Name Authority File)'"/>
         </xsl:when>
         <xsl:when test="self::node()/@authority='tgm'">
-          <xsl:value-of select="'Library of Congress Thesaurus for Graphic Materials'"/>
+          <xsl:value-of select="', (Library of Congress Thesaurus for Graphic Materials)'"/>
         </xsl:when>
         <xsl:when test="self::node()/@authority='agrovoc'">
-          <xsl:value-of select="'AGROVOC'"/>
+          <xsl:value-of select="', (AGROVOC)'"/>
         </xsl:when>
       </xsl:choose>
     </xsl:variable>
 
     <field name="utk_mods_subject_topic_ms">
-      <xsl:value-of select="normalize-space(concat(.,' ','(',$vAuthority,')'))"/>
+      <xsl:value-of select="normalize-space(concat(.,' ',$vAuthority))"/>
     </field>
   </xsl:template>
 
