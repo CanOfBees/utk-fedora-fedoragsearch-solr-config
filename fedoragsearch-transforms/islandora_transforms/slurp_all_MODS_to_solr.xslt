@@ -119,6 +119,15 @@
       </xsl:choose>
     </field>
   </xsl:template>
+  
+  <!-- the following template creates a UTK MODS Related Work Field -->
+  <xsl:template match="mods:mods/mods:relatedItem[@type='otherVersion']" mode="utk_MODS">
+    <xsl:variable name="related_work" select="child::mods:titleInfo/mods:title"/>
+    <field name="utk_mods_relate_work_ms">
+      <xsl:value-of select="$related_work"/>
+    </field>
+  </xsl:template>
+  
 
   <!-- subjects! -->
   <!-- the following template creates a simplified topical subject _ms field -->
