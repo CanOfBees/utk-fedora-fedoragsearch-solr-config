@@ -92,6 +92,13 @@
     </field>
   </xsl:template>
   
+  <xsl:template match="mods:mods/mods:originInfo/mods:dateCreated[@encoding='edtf']" mode="utk_MODS">
+    <xsl:variable name="decade" select="substring(., 1, 3)"/>
+    <field name="utk_mods_dateCreated_decade_s">
+          <xsl:value-of select="concat($decade, '0s')"/>
+    </field>
+  </xsl:template>
+  
   <!-- the following template creates a Supplied Title field -->
   <xsl:template match="mods:mods/mods:titleInfo[@supplied='yes']/mods:title" mode="utk_MODS">
     <field name="utk_mods_supplied_title_ms">
