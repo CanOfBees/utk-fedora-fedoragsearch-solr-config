@@ -94,7 +94,7 @@
   
   <xsl:template match="mods:mods/mods:originInfo/mods:dateCreated[@encoding='edtf']" mode="utk_MODS">
     <xsl:variable name="decade" select="substring(., 1, 3)"/>
-    <field name="utk_mods_dateCreated_decade_s">
+    <field name="utk_mods_dateCreated_decade_ms">
           <xsl:value-of select="concat($decade, '0s')"/>
     </field>
   </xsl:template>
