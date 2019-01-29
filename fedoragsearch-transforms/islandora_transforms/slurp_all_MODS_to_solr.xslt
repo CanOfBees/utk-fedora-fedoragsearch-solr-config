@@ -222,7 +222,7 @@
   </xsl:template>
   
   <!-- Build instrumentation facet. -->
-  <xsl:template match="mods:mods/mods:note[@displayLabel='instrumentation']" mode="utk_MODS">
+  <xsl:template match="mods:mods/mods:note[@type='instrumentation']" mode="utk_MODS">
     <field name="utk_mods_note_instrumentation_ms">
       <xsl:value-of select="normalize-space(.)"/>
     </field>
