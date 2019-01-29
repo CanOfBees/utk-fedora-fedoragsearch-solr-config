@@ -220,6 +220,13 @@
       </xsl:for-each>
     </field>
   </xsl:template>
+  
+  <!-- Build instrumentation facet. -->
+  <xsl:template match="mods:mods/mods:note[@displayLabel='instrumentation']" mode="utk_MODS">
+    <field name="utk_mods_note_instrumentation_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
 
   <!-- Handle dates. -->
   <xsl:template match="mods:*[(@type='date') or (contains(translate(local-name(), 'D', 'd'), 'date'))][normalize-space(text())]" mode="slurping_MODS">
