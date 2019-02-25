@@ -45,7 +45,7 @@
       <xsl:if test="child::mods:role/mods:roleTerm">
         <xsl:text>(</xsl:text>
         <xsl:for-each select="child::mods:role/mods:roleTerm">
-          <xsl:value-of select="."/>
+          <xsl:value-of select="normalize-space(.)"/>
           <xsl:if test="not(position()=last())">,</xsl:if>
         </xsl:for-each>
         <xsl:text>)</xsl:text>
