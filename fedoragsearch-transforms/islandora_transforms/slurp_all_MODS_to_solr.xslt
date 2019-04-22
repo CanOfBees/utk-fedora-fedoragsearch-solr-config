@@ -176,7 +176,7 @@
     </xsl:variable>
 
     <field name="utk_mods_subject_topic_ms">
-      <xsl:value-of select="normalize-space(concat(., $vAuthority))"/>
+      <xsl:value-of select="normalize-space(concat(child::mods:topic, $vAuthority))"/>
     </field>
   </xsl:template>
 
