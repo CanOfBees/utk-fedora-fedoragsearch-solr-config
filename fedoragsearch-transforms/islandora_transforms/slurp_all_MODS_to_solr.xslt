@@ -228,6 +228,13 @@
     </field>
   </xsl:template>
 
+  <!-- add a tableOfContents field -->
+  <xsl:template match="mods:mods/mods:tableOfContents" mode="utk_MODS">
+    <field name="utk_mods_toc_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+
   <!-- Handle dates. -->
   <xsl:template match="mods:*[(@type='date') or (contains(translate(local-name(), 'D', 'd'), 'date'))][normalize-space(text())]" mode="slurping_MODS">
     <xsl:param name="prefix"/>
