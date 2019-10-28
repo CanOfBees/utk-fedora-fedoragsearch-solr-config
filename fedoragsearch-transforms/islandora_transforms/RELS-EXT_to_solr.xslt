@@ -4,6 +4,7 @@
     xmlns:java="http://xml.apache.org/xalan/java"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:foxml="info:fedora/fedora-system:def/foxml#"
+    xmlns:islandora="http://islandora.ca/ontology/relsext#"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" exclude-result-prefixes="rdf java">
 
     <xsl:variable name="single_valued_hashset_for_rels_ext" select="java:java.util.HashSet.new()"/>
@@ -81,6 +82,7 @@
       <!-- The method java.util.HashSet.add will return false when the value is
       already in the set. -->
       <xsl:choose>
+        <xsl:when test="starts-with(name(), 'islandora:isSequenceNumberOf')"/>
         <xsl:when
           test="java:add($single_valued_hashset_for_rels_ext, concat($prefix, local-name(), '_', $type, '_s'))">
           <field>
