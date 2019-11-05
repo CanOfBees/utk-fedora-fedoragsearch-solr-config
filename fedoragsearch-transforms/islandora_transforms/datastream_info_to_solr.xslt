@@ -9,7 +9,7 @@
     <field name="fedora_datastreams_ms">
       <xsl:value-of select="@ID"/>
     </field>
-    <xsl:call-template name="fedora_datastream_attribute_fields">
+    <!--<xsl:call-template name="fedora_datastream_attribute_fields">
       <xsl:with-param name="id" select='@ID'/>
       <xsl:with-param name="prefix">fedora_datastream_info</xsl:with-param>
     </xsl:call-template>
@@ -17,10 +17,10 @@
     <xsl:call-template name="fedora_datastream_attribute_fields">
       <xsl:with-param name="element" select="foxml:datastreamVersion[last()]"/>
       <xsl:with-param name="prefix">fedora_datastream_latest</xsl:with-param>
-    </xsl:call-template>
+    </xsl:call-template>-->
   </xsl:template>
 
-  <xsl:template match="foxml:datastreamVersion" mode="index_object_datastreams">
+  <!--<xsl:template match="foxml:datastreamVersion" mode="index_object_datastreams">
     <xsl:call-template name="fedora_datastream_attribute_fields"/>
   </xsl:template>
 
@@ -42,6 +42,6 @@
         <xsl:value-of select="normalize-space(.)"/>
       </field>
     </xsl:for-each>
-  </xsl:template>
+  </xsl:template>-->
 
 </xsl:stylesheet>
