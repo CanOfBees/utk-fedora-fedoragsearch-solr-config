@@ -230,7 +230,7 @@
   
   <!-- add utk_mods_typeOfResource_ms  for typeOfResource values-->
   <xsl:template match="mods:mods/mods:typeOfResource" mode="utk_MODS">
-    <field name="utk_mods_typeOfResource_ms ">
+    <field name="utk_mods_typeOfResource_ms">
       <xsl:value-of select="normalize-space(.)"/>
     </field>
   </xsl:template>
