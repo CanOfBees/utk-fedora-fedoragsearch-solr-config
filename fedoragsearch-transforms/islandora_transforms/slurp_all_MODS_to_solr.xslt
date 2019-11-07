@@ -249,6 +249,13 @@
     </field>
   </xsl:template>
   
+  <!-- add utk_mods_accessCondition_restrictions_on_access_ms for Restricted values -->
+  <xsl:template match="mods:mods/mods:accessCondition[@type='restriction on access']" mode="utk_MODS">
+    <field name="utk_mods_accessCondition_restrictions_on_access_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
   <!-- add utk_mods_genre_ms for genre values-->
   <xsl:template match="mods:mods/mods:genre" mode="utk_MODS">
     <field name="utk_mods_genre_ms">
