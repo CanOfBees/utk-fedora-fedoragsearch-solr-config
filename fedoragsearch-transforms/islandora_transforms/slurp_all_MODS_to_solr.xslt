@@ -227,5 +227,94 @@
       <xsl:value-of select="normalize-space(.)"/>
     </field>
   </xsl:template>
+  
+  <!-- add utk_mods_typeOfResource_ms  for typeOfResource values-->
+  <xsl:template match="mods:mods/mods:typeOfResource" mode="utk_MODS">
+    <field name="utk_mods_typeOfResource_ms ">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
+  <!-- add utk_mods_accessCondition_local_ms for Local Access Conditions values-->
+  <xsl:template match="mods:mods/mods:accessCondition[@type='local']" mode="utk_MODS">
+    <field name="utk_mods_accessCondition_local_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
+  <!-- add utk_mods_accessCondition_use_and_reproduction_ms for Standardized Rights values-->
+  <xsl:template match="mods:mods/mods:accessCondition[@type='use and reproduction']" mode="utk_MODS">
+    <field name="utk_mods_accessCondition_use_and_reproduction_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
+  <!-- add utk_mods_genre_ms for genre values-->
+  <xsl:template match="mods:mods/mods:genre" mode="utk_MODS">
+    <field name="utk_mods_genre_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
+  <!-- add utk_mods_identifier_ms for local identifier values-->
+  <xsl:template match="mods:mods/mods:identifier" mode="utk_MODS">
+    <xsl:if test=".[@type='local'] or .[@type='filename']">
+      <field name="utk_mods_identifier_ms">
+        <xsl:value-of select="normalize-space(.)"/>
+      </field>
+    </xsl:if>
+  </xsl:template>
+  
+  <!-- add utk_mods_language_languageTerm_text_ms for language text -->
+  <xsl:template match="mods:mods/mods:language/mods:languageTerm[@type='text']" mode="utk_MODS">
+    <field name="utk_mods_language_languageTerm_text_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
+  <!-- add utk_mods_location_physicalLocation_ms for physical locations -->
+  <xsl:template match="mods:mods/mods:location/mods:physicalLocation" mode="utk_MODS">
+    <field name="utk_mods_location_physicalLocation_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
+  <!-- add utk_mods_note_ms for general notes and utk_mods_note_Transcribed_from_Original_Collection_ms for Transcriptions -->
+  <xsl:template match="mods:mods/mods:note" mode="utk_MODS">
+    <xsl:choose>
+      <xsl:when test=".[@displayLabel='Transcribed from Original Collection']">
+        <field name="utk_mods_note_Transcribed_from_Original_Collection_ms">
+          <xsl:value-of select="normalize-space(.)"/>
+        </field>
+      </xsl:when>
+      <xsl:when test=".[@displayLabel='dpn']"/>
+      <xsl:otherwise>
+        <field name="utk_mods_note_ms">
+          <xsl:value-of select="normalize-space(.)"/>
+        </field>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  
+  <!-- add utk_mods_originInfo_dateIssued_ms for all dateIssueds -->
+  <xsl:template match="mods:mods/mods:originInfo/mods:dateIssued" mode="utk_MODS">
+    <field name="utk_mods_originInfo_dateIssued_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
+  <!-- add utk_mods_originInfo_place_placeTerm_text_ms for place terms -->
+  <xsl:template match="mods:mods/mods:originInfo/mods:place/mods:placeTerm[@type='text']" mode="utk_MODS">
+    <field name="utk_mods_originInfo_place_placeTerm_text_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
+  <!-- add utk_mods_originInfo_publisher_ms for publishers -->
+  <xsl:template match="mods:mods/mods:originInfo/mods:publisher" mode="utk_MODS">
+    <field name="utk_mods_originInfo_publisher_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
 
 </xsl:stylesheet>
