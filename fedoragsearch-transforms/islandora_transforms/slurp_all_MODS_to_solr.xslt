@@ -9,7 +9,7 @@
   <!-- <xsl:include href="/vhosts/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/config/index/FgsIndex/islandora_transforms/library/xslt-date-template.xslt"/>-->
   <!--<xsl:include href="/usr/share/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms/library/xslt-date-template.xslt"/>-->
   <!-- <xsl:include href="/vhosts/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/config/index/FgsIndex/islandora_transforms/manuscript_finding_aid.xslt"/> -->
-  <xsl:include href="/usr/share/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms/manuscript_finding_aid.xslt"/>
+  <!--<xsl:include href="/usr/share/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms/manuscript_finding_aid.xslt"/>-->
   <!-- HashSet to track single-valued fields. -->
   <xsl:variable name="single_valued_hashset" select="java:java.util.HashSet.new()"/>
 
@@ -258,7 +258,7 @@
   
   <!-- add utk_mods_identifier_ms for local identifier values-->
   <xsl:template match="mods:mods/mods:identifier" mode="utk_MODS">
-    <xsl:if test=".[@type='local'] or .[@type='filename']">
+    <xsl:if test="self::node()[@type='local'] or self::node()[@type='filename']">
       <field name="utk_mods_identifier_ms">
         <xsl:value-of select="normalize-space(.)"/>
       </field>
@@ -282,12 +282,12 @@
   <!-- add utk_mods_note_ms for general notes and utk_mods_note_Transcribed_from_Original_Collection_ms for Transcriptions -->
   <xsl:template match="mods:mods/mods:note" mode="utk_MODS">
     <xsl:choose>
-      <xsl:when test=".[@displayLabel='Transcribed from Original Collection']">
+      <xsl:when test="self::node()[@displayLabel='Transcribed from Original Collection']">
         <field name="utk_mods_note_Transcribed_from_Original_Collection_ms">
           <xsl:value-of select="normalize-space(.)"/>
         </field>
       </xsl:when>
-      <xsl:when test=".[@displayLabel='dpn']"/>
+      <xsl:when test="self::node()[@displayLabel='dpn']"/>
       <xsl:otherwise>
         <field name="utk_mods_note_ms">
           <xsl:value-of select="normalize-space(.)"/>
