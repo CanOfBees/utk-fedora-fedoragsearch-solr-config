@@ -197,13 +197,6 @@
     </field>
   </xsl:template>
 
-  <!-- the following template creates an _ms field for accessCondition+attributes -->
-  <xsl:template match="mods:mods/mods:accessCondition[@type='use and reproduction']">
-    <field name="utk_mods_accessCondition_ms">
-      <xsl:value-of select="normalize-space(concat(.,' ','(','useAndReproduction',')'))"/>
-    </field>
-  </xsl:template>
-
   <!-- the following template creates an _ms field for abstract(s) -->
   <!-- pulls all all mods:abstracts into one _ms field. maybe overly greedy? -->
   <xsl:template match="mods:mods/mods:abstract" mode="utk_MODS">
@@ -224,6 +217,102 @@
   <!-- add a tableOfContents field -->
   <xsl:template match="mods:mods/mods:tableOfContents" mode="utk_MODS">
     <field name="utk_mods_toc_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
+  <!-- add utk_mods_typeOfResource_ms  for typeOfResource values-->
+  <xsl:template match="mods:mods/mods:typeOfResource" mode="utk_MODS">
+    <field name="utk_mods_typeOfResource_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
+  <!-- add utk_mods_accessCondition_local_ms for Local Access Conditions values-->
+  <xsl:template match="mods:mods/mods:accessCondition[@type='local']" mode="utk_MODS">
+    <field name="utk_mods_accessCondition_local_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
+  <!-- add utk_mods_accessCondition_use_and_reproduction_ms for Standardized Rights values-->
+  <xsl:template match="mods:mods/mods:accessCondition[@type='use and reproduction']" mode="utk_MODS">
+    <field name="utk_mods_accessCondition_use_and_reproduction_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
+  <!-- add utk_mods_accessCondition_restrictions_on_access_ms for Restricted values -->
+  <xsl:template match="mods:mods/mods:accessCondition[@type='restriction on access']" mode="utk_MODS">
+    <field name="utk_mods_accessCondition_restrictions_on_access_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
+  <!-- add utk_mods_genre_ms for genre values-->
+  <xsl:template match="mods:mods/mods:genre" mode="utk_MODS">
+    <field name="utk_mods_genre_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
+  <!-- add utk_mods_identifier_ms for local identifier values-->
+  <xsl:template match="mods:mods/mods:identifier" mode="utk_MODS">
+    <xsl:if test="self::node()[@type='local'] or self::node()[@type='filename']">
+      <field name="utk_mods_identifier_ms">
+        <xsl:value-of select="normalize-space(.)"/>
+      </field>
+    </xsl:if>
+  </xsl:template>
+  
+  <!-- add utk_mods_language_languageTerm_text_ms for language text -->
+  <xsl:template match="mods:mods/mods:language/mods:languageTerm[@type='text']" mode="utk_MODS">
+    <field name="utk_mods_language_languageTerm_text_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
+  <!-- add utk_mods_location_physicalLocation_ms for physical locations -->
+  <xsl:template match="mods:mods/mods:location/mods:physicalLocation" mode="utk_MODS">
+    <field name="utk_mods_location_physicalLocation_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
+  <!-- add utk_mods_note_ms for general notes and utk_mods_note_Transcribed_from_Original_Collection_ms for Transcriptions -->
+  <xsl:template match="mods:mods/mods:note" mode="utk_MODS">
+    <xsl:choose>
+      <xsl:when test="self::node()[@displayLabel='Transcribed from Original Collection']">
+        <field name="utk_mods_note_Transcribed_from_Original_Collection_ms">
+          <xsl:value-of select="normalize-space(.)"/>
+        </field>
+      </xsl:when>
+      <xsl:when test="self::node()[@displayLabel='dpn']"/>
+      <xsl:otherwise>
+        <field name="utk_mods_note_ms">
+          <xsl:value-of select="normalize-space(.)"/>
+        </field>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  
+  <!-- add utk_mods_originInfo_dateIssued_ms for all dateIssueds -->
+  <xsl:template match="mods:mods/mods:originInfo/mods:dateIssued" mode="utk_MODS">
+    <field name="utk_mods_originInfo_dateIssued_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
+  <!-- add utk_mods_originInfo_place_placeTerm_text_ms for place terms -->
+  <xsl:template match="mods:mods/mods:originInfo/mods:place/mods:placeTerm[@type='text']" mode="utk_MODS">
+    <field name="utk_mods_originInfo_place_placeTerm_text_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
+  <!-- add utk_mods_originInfo_publisher_ms for publishers -->
+  <xsl:template match="mods:mods/mods:originInfo/mods:publisher" mode="utk_MODS">
+    <field name="utk_mods_originInfo_publisher_ms">
       <xsl:value-of select="normalize-space(.)"/>
     </field>
   </xsl:template>
