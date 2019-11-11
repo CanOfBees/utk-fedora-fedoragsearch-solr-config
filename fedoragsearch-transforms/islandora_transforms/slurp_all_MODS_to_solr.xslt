@@ -128,7 +128,50 @@
     </field>
   </xsl:template>
   
-
+  <!-- the following template creates a UTK MODS Extent Field -->
+  <xsl:template match="mods:mods/mods:physicalDescription/mods:extent" mode="utk_MODS">
+    <field name="utk_mods_physicalDescription_extent_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
+  <!-- the following template creates a UTK MODS Form Field -->
+  <xsl:template match="mods:mods/mods:physicalDescription/mods:form" mode="utk_MODS">
+    <xsl:choose>
+      <xsl:when test="self::node()[@authority]">
+        <field name="utk_mods_physicalDescription_form_authority_ms">
+          <xsl:value-of select="normalize-space(.)"/>
+        </field>
+      </xsl:when>
+      <xsl:otherwise>
+        <field name="utk_mods_physicalDescription_form_ms">
+          <xsl:value-of select="normalize-space(.)"/>
+        </field>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  
+  <!-- the following template creates a UTK MODS Record Source Field -->
+  <xsl:template match="mods:mods/mods:recordInfo/mods:recordContentSource" mode="utk_MODS">
+    <field name="utk_mods_recordInfo_recordContentSource_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
+  <!-- the following template creates a UTK MODS Digital Collection Field -->
+  <xsl:template match="mods:mods/mods:relatedItem[@type='host'][@displayLabel='Project']/mods:titleInfo/mods:title" mode="utk_MODS">
+    <field name="utk_mods_relatedItem_host_Project_titleInfo_title_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
+  <!-- the following template creates a UTK MODS Digital Collection URL Field -->
+  <xsl:template match="mods:mods/mods:relatedItem[@type='host'][@displayLabel='Project']/mods:location/mods:url" mode="utk_MODS">
+    <field name="utk_mods_relatedItem_host_Project_location_url_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
   <!-- subjects! -->
   <!-- the following template creates a simplified topical subject _ms field -->
   <!--
@@ -221,7 +264,7 @@
     </field>
   </xsl:template>
   
-  <!-- add utk_mods_typeOfResource_ms  for typeOfResource values-->
+  <!-- add utk_mods_typeOfResource_ms for typeOfResource values-->
   <xsl:template match="mods:mods/mods:typeOfResource" mode="utk_MODS">
     <field name="utk_mods_typeOfResource_ms">
       <xsl:value-of select="normalize-space(.)"/>
