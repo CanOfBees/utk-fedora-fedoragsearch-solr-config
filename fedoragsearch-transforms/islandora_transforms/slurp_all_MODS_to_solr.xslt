@@ -160,7 +160,7 @@
   <xsl:template match="mods:mods/mods:subject" mode="utk_MODS">
     <xsl:choose>
       <xsl:when test="self::node()[@authority]">
-    <xsl:variable name="vAuthority">
+        <xsl:variable name="vAuthority">
           <xsl:choose>
             <xsl:when test="self::node()/@authority='dots'">
               <xsl:value-of select="', (Database of the Smokies)'"/>
@@ -184,7 +184,7 @@
               <xsl:value-of select="', (AGROVOC)'"/>
             </xsl:when>
           </xsl:choose>
-        </xsl:variable>
+         </xsl:variable>
     
         <xsl:choose>
           <xsl:when test="self::node()[mods:topic]">
