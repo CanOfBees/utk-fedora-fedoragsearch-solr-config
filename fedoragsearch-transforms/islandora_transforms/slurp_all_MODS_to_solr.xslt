@@ -68,22 +68,6 @@
       </xsl:choose>
     </field>
   </xsl:template>
-
-  <!-- the following template creates a geoSubject+coordinates _ms field or just geoSubject_ms field-->
-  <xsl:template match="mods:mods/mods:subject[mods:geographic]" mode="utk_MODS">
-    <xsl:variable name="vGeo" select="child::mods:geographic"/>
-    <xsl:variable name="vCoords" select="child::mods:cartographics/mods:coordinates"/>
-    <field name="utk_mods_geo_ms">
-      <xsl:choose>
-        <xsl:when test="$vCoords!=''">
-          <xsl:value-of select="concat($vGeo,' ','(',$vCoords,')')"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="$vGeo"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </field>
-  </xsl:template>
   
   <xsl:template match="mods:mods/mods:originInfo/mods:dateCreated[@encoding='edtf']" mode="utk_MODS">
     <xsl:variable name="decade" select="substring(., 1, 3)"/>
@@ -172,72 +156,107 @@
     </field>
   </xsl:template>
   
-  <!-- subjects! -->
-  <!-- the following template creates a simplified topical subject _ms field -->
-  <!--
-    note: this is *very* generic; it grabs all mods:subjects with an @authority,
-    so we may want to add some specificity in here at some point. maybe.
-  -->
-  <xsl:template match="mods:mods/mods:subject[@authority]" mode="utk_MODS">
-    <!--
-       dots = Database of the Smokies
-       lcsh = Library of Congress
-       fast = FAST
-       local = Local Thang
-     -->
-    <xsl:variable name="vAuthority">
-      <xsl:choose>
-        <xsl:when test="self::node()/@authority='dots'">
-          <xsl:value-of select="', (Database of the Smokies)'"/>
-        </xsl:when>
-        <xsl:when test="self::node()/@authority='lcsh'">
-          <xsl:value-of select="', (Library of Congress Subject Headings)'"/>
-        </xsl:when>
-        <xsl:when test="self::node()/@authority='fast'">
-          <xsl:value-of select="', (FAST)'"/>
-        </xsl:when>
-        <xsl:when test="self::node()/@authority='local'">
-          <xsl:value-of select="', (Local Subject Heading)'"/>
-        </xsl:when>
-        <xsl:when test="self::node()/@authority='naf'">
-          <xsl:value-of select="', (Library of Congress Name Authority File)'"/>
-        </xsl:when>
-        <xsl:when test="self::node()/@authority='tgm'">
-          <xsl:value-of select="', (Library of Congress Thesaurus for Graphic Materials)'"/>
-        </xsl:when>
-        <xsl:when test="self::node()/@authority='agrovoc'">
-          <xsl:value-of select="', (AGROVOC)'"/>
-        </xsl:when>
-      </xsl:choose>
-    </xsl:variable>
-
-    <field name="utk_mods_subject_topic_ms">
-      <xsl:value-of select="normalize-space(concat(child::mods:topic, $vAuthority))"/>
-    </field>
-  </xsl:template>
-
-  <!-- the following templates creates a simplified Volunteer Voices subject _ms field -->
-  <!--
-    one for each:
-    Volunteer Voices Curriculum Topics
-    Broad Topics
-    Tennessee Social Studies K-12 Eras in American History
-  -->
-  <xsl:template match="mods:mods/mods:subject[@displayLabel='Volunteer Voices Curriculum Topics']" mode="utk_MODS">
-    <field name="utk_mods_subject_topic_curriculumTopics_ms">
-      <xsl:value-of select="normalize-space(concat(.,' ','(','Volunteer Voices',')'))"/>
-    </field>
-  </xsl:template>
-  <xsl:template match="mods:mods/mods:subject[@displayLabel='Broad Topics']" mode="utk_MODS">
-    <field name="utk_mods_subject_topic_broadTopics_ms">
-      <xsl:value-of select="normalize-space(concat(.,' ','(','Volunteer Voices',')'))"/>
-    </field>
-  </xsl:template>
-  <xsl:template match="mods:mods/mods:subject[@displayLabel='Tennessee Social Studies K-12 Eras in American History']"
-                mode="utk_MODS">
-    <field name="utk_mods_subject_topic_socStudiesK12_ms">
-      <xsl:value-of select="normalize-space(concat(.,' ','(','Volunteer Voices',')'))"/>
-    </field>
+  <!-- An ugly subject template to rule all others -->
+  <xsl:template match="mods:mods/mods:subject" mode="utk_MODS">
+    <xsl:choose>
+      <xsl:when test="self::node()[@authority]">
+        <xsl:variable name="vAuthority">
+          <xsl:choose>
+            <xsl:when test="self::node()/@authority='dots'">
+              <xsl:value-of select="', (Database of the Smokies)'"/>
+            </xsl:when>
+            <xsl:when test="self::node()/@authority='lcsh'">
+              <xsl:value-of select="', (Library of Congress Subject Headings)'"/>
+            </xsl:when>
+            <xsl:when test="self::node()/@authority='fast'">
+              <xsl:value-of select="', (FAST)'"/>
+            </xsl:when>
+            <xsl:when test="self::node()/@authority='local'">
+              <xsl:value-of select="', (Local Subject Heading)'"/>
+            </xsl:when>
+            <xsl:when test="self::node()/@authority='naf'">
+              <xsl:value-of select="', (Library of Congress Name Authority File)'"/>
+            </xsl:when>
+            <xsl:when test="self::node()/@authority='tgm'">
+              <xsl:value-of select="', (Library of Congress Thesaurus for Graphic Materials)'"/>
+            </xsl:when>
+            <xsl:when test="self::node()/@authority='agrovoc'">
+              <xsl:value-of select="', (AGROVOC)'"/>
+            </xsl:when>
+          </xsl:choose>
+         </xsl:variable>
+    
+        <xsl:choose>
+          <xsl:when test="self::node()[mods:topic]">
+            <field name="utk_mods_subject_topic_ms">
+              <xsl:value-of select="normalize-space(concat(child::mods:topic, $vAuthority))"/>
+            </field>
+          </xsl:when>
+          <xsl:when test="self::node()[mods:geographic]">
+            <xsl:variable name="vGeo" select="child::mods:geographic"/>
+            <xsl:variable name="vCoords" select="child::mods:cartographics/mods:coordinates"/>
+            <field name="utk_mods_geo_ms">
+              <xsl:choose>
+                <xsl:when test="$vCoords!=''">
+                  <xsl:value-of select="concat($vGeo,' ','(',$vCoords,')')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:value-of select="$vGeo"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </field>
+          </xsl:when>
+          <xsl:when test="self::node()[mods:temporal]">
+            <field name="utk_mods_subject_temporal_ms">
+              <xsl:value-of select="normalize-space(child::mods:temporal)"/>
+            </field>
+          </xsl:when>
+        </xsl:choose>
+      </xsl:when>
+      <xsl:when test="self::node()[@displayLabel='Volunteer Voices Curriculum Topics']">
+        <field name="utk_mods_subject_topic_curriculumTopics_ms">
+          <xsl:value-of select="normalize-space(concat(child::mods:topic,' ','(','Volunteer Voices',')'))"/>
+        </field>
+      </xsl:when>
+      <xsl:when test="self::node()[@displayLabel='Broad Topics']">
+        <field name="utk_mods_subject_topic_broadTopics_ms">
+          <xsl:value-of select="normalize-space(concat(child::mods:topic,' ','(','Volunteer Voices',')'))"/>
+        </field>
+      </xsl:when>
+      <xsl:when test="self::node()[@displayLabel='Tennessee Social Studies K-12 Eras in American History']">
+        <field name="utk_mods_subject_topic_socStudiesK12_ms">
+          <xsl:value-of select="normalize-space(concat(child::mods:topic,' ','(','Volunteer Voices',')'))"/>
+        </field>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:choose>
+          <xsl:when test="self::node()[mods:topic]">
+            <field name="utk_mods_subject_topic_ms">
+              <xsl:value-of select="normalize-space(child::mods:topic)"/>
+            </field>
+          </xsl:when>
+          <xsl:when test="self::node()[mods:temporal]">
+            <field name="utk_mods_subject_temporal_ms">
+              <xsl:value-of select="normalize-space(child::mods:temporal)"/>
+            </field>
+          </xsl:when>
+          <xsl:when test="self::node()[mods:geographic]">
+            <xsl:variable name="vGeo" select="child::mods:geographic"/>
+            <xsl:variable name="vCoords" select="child::mods:cartographics/mods:coordinates"/>
+            <field name="utk_mods_geo_ms">
+              <xsl:choose>
+                <xsl:when test="$vCoords!=''">
+                  <xsl:value-of select="concat($vGeo,' ','(',$vCoords,')')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:value-of select="$vGeo"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </field>
+          </xsl:when>
+        </xsl:choose>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
   <!-- the following template creates an _ms field for abstract(s) -->
