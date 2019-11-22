@@ -390,13 +390,6 @@
     </field>
   </xsl:template>
 
-  <!-- add mods_genre_ms -->
-  <xsl:template match="mods:mods/mods:genre" mode="utk_MODS">
-    <field name="mods_genre_ms">
-      <xsl:value-of select="normalize-space(.)"/>
-    </field>
-  </xsl:template>
-
   <!-- add mods_note_Tags_ms -->
   <xsl:template match="mods:mods/mods:note[@displayLabel='Tags']" mode="utk_MODS">
     <field name="utk_mods_note_Tags_ms">
