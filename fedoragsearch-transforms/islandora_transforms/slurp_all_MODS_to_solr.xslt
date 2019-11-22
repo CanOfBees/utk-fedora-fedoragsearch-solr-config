@@ -379,4 +379,31 @@
     </field>
   </xsl:template>
 
+  <!-- add mods_genre_ms -->
+  <xsl:template match="mods:mods/mods:genre" mode="utk_MODS">
+    <field name="mods_genre_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+
+  <!-- add mods_note_Tags_ms -->
+  <xsl:template match="mods:mods/mods:note[@displayLabel='Tags']" mode="utk_MODS">
+    <field name="utk_mods_note_Tags_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+
+  <!-- add mods_originInfo_ms -->
+  <xsl:template match="mods:mods/mods:originInfo[mods:dateCreated or mods:dateOther]" mode="utk_MODS">
+    <field name="utk_mods_originInfo_date_ms">
+      <xsl:value-of select="child::mods:*[contains(local-name(),'dateCreated') or contains(local-name(),'dateOther')]"/>
+    </field>
+  </xsl:template>
+
+  <xsl:template match="mods:mods/mods:physicalDescription[mods:form[@authority='aat']]" mode="utk_MODS">
+    <field name="utk_mods_physicalDescription_form_authority_aat_ms">
+      <xsl:value-of select="normalize-space(child::mods:form[@authority='aat'])"/>
+    </field>
+  </xsl:template>
+
 </xsl:stylesheet>
