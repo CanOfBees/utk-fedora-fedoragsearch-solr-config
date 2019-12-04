@@ -404,10 +404,4 @@
     </field>
   </xsl:template>
 
-  <xsl:template match="mods:mods/mods:physicalDescription[mods:form[@authority='aat']]" mode="utk_MODS">
-    <field name="utk_mods_physicalDescription_form_authority_aat_ms">
-      <xsl:value-of select="normalize-space(child::mods:form[@authority='aat'])"/>
-    </field>
-  </xsl:template>
-
 </xsl:stylesheet>
