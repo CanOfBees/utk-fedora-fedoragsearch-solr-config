@@ -94,6 +94,12 @@
             <title>Voices Out Loud Oral Histories</title>
         </titleInfo>
     </relatedItem>
+    <relatedItem displayLabel="Collection" type="host">
+        <titleInfo>
+            <title>Pretend Collection</title>
+        </titleInfo>
+        <identifier>MS.9999</identifier>
+    </relatedItem>
     <location>
         <physicalLocation valueURI="http://id.loc.gov/authorities/names/no2014027633">University of Tennessee, Knoxville. Special Collections</physicalLocation>
     </location>

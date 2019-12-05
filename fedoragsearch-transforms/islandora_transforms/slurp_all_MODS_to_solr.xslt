@@ -75,6 +75,13 @@
           <xsl:value-of select="concat($decade, '0s')"/>
     </field>
   </xsl:template>
+
+  <!-- add utk_mods_titleInfo_title_ms -->
+  <xsl:template match="mods:mods/mods:titleInfo[not(@supplied)]/mods:title" mode="utk_MODS">
+    <field name="utk_mods_titleInfo_title_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
   
   <!-- the following template creates a Supplied Title field -->
   <xsl:template match="mods:mods/mods:titleInfo[@supplied='yes']/mods:title" mode="utk_MODS">
@@ -83,7 +90,7 @@
     </field>
   </xsl:template>
 
-  <!-- the following template creates an archivalCollection+archivalIdentifier _ms field -->
+  <!-- the following template creates an archivalCollection+archivalIdentifier_ms field and facet field -->
   <xsl:template match="mods:mods/mods:relatedItem[@type='host'][@displayLabel='Collection']" mode="utk_MODS">
     <xsl:variable name="vColl" select="child::mods:titleInfo/mods:title"/>
     <xsl:variable name="vArchivalID">
@@ -101,6 +108,10 @@
           <xsl:value-of select="concat($vColl,', ',$vArchivalID)"/>
         </xsl:otherwise>
       </xsl:choose>
+    </field>
+
+    <field name="utk_mods_relatedItem_titleInfo_title_ms">
+      <xsl:value-of select="$vColl"/>
     </field>
   </xsl:template>
   
@@ -376,6 +387,20 @@
   <xsl:template match="mods:mods/mods:originInfo/mods:publisher" mode="utk_MODS">
     <field name="utk_mods_originInfo_publisher_ms">
       <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+
+  <!-- add mods_note_Tags_ms -->
+  <xsl:template match="mods:mods/mods:note[@displayLabel='Tags']" mode="utk_MODS">
+    <field name="utk_mods_note_Tags_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+
+  <!-- add mods_originInfo_ms -->
+  <xsl:template match="mods:mods/mods:originInfo[mods:dateCreated or mods:dateOther]" mode="utk_MODS">
+    <field name="utk_mods_originInfo_date_ms">
+      <xsl:value-of select="child::mods:*[contains(local-name(),'dateCreated') or contains(local-name(),'dateOther')]"/>
     </field>
   </xsl:template>
 
