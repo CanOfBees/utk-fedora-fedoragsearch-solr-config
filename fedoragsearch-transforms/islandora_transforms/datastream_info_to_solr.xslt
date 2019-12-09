@@ -23,7 +23,7 @@
   </xsl:template>
 
   <xsl:template match="foxml:datastream[@ID='FEATURED']" mode="index_object_datastreams">
-    <field name="fedora_datastream_version_FEATURED_SIZE_ms">
+    <field name="utk_fedora_datastream_version_FEATURED_SIZE_ms">
       <xsl:value-of select="child::foxml:datastreamVersion/@SIZE"/>
     </field>
   </xsl:template>
