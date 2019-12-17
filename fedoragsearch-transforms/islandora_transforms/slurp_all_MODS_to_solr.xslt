@@ -202,6 +202,9 @@
             <field name="utk_mods_subject_topic_ms">
               <xsl:value-of select="normalize-space(concat(child::mods:topic, $vAuthority))"/>
             </field>
+            <field name="utk_mods_subject_topic_facet_ms">
+              <xsl:value-of select="normalize-space(child::mods:topic)"/>
+            </field>
           </xsl:when>
           <xsl:when test="self::node()[mods:geographic]">
             <xsl:variable name="vGeo" select="child::mods:geographic"/>
@@ -216,9 +219,15 @@
                 </xsl:otherwise>
               </xsl:choose>
             </field>
+            <field name="utk_mods_geo_facet_ms">
+              <xsl:value-of select="normalize-space(child::mods:geographic)"/>
+            </field>
           </xsl:when>
           <xsl:when test="self::node()[mods:temporal]">
             <field name="utk_mods_subject_temporal_ms">
+              <xsl:value-of select="normalize-space(child::mods:temporal)"/>
+            </field>
+            <field name="utk_mods_subject_temporal_facet_ms">
               <xsl:value-of select="normalize-space(child::mods:temporal)"/>
             </field>
           </xsl:when>
@@ -228,15 +237,24 @@
         <field name="utk_mods_subject_topic_curriculumTopics_ms">
           <xsl:value-of select="normalize-space(concat(child::mods:topic,' ','(','Volunteer Voices',')'))"/>
         </field>
+        <field name="utk_mods_subject_topic_curriculumTopics_facets_ms">
+          <xsl:value-of select="normalize-space(child::mods:topic)"/>
+        </field>
       </xsl:when>
       <xsl:when test="self::node()[@displayLabel='Broad Topics']">
         <field name="utk_mods_subject_topic_broadTopics_ms">
           <xsl:value-of select="normalize-space(concat(child::mods:topic,' ','(','Volunteer Voices',')'))"/>
         </field>
+        <field name="utk_mods_subject_topic_broadTopics_facets_ms">
+          <xsl:value-of select="normalize-space(child::mods:topic)"/>
+        </field>
       </xsl:when>
       <xsl:when test="self::node()[@displayLabel='Tennessee Social Studies K-12 Eras in American History']">
         <field name="utk_mods_subject_topic_socStudiesK12_ms">
           <xsl:value-of select="normalize-space(concat(child::mods:topic,' ','(','Volunteer Voices',')'))"/>
+        </field>
+        <field name="utk_mods_subject_topic_socStudiesK12_facets_ms">
+          <xsl:value-of select="normalize-space(child::mods:topic)"/>
         </field>
       </xsl:when>
       <xsl:otherwise>
@@ -245,9 +263,15 @@
             <field name="utk_mods_subject_topic_ms">
               <xsl:value-of select="normalize-space(child::mods:topic)"/>
             </field>
+            <field name="utk_mods_subject_topic_facets_ms">
+              <xsl:value-of select="normalize-space(child::mods:topic)"/>
+            </field>
           </xsl:when>
           <xsl:when test="self::node()[mods:temporal]">
             <field name="utk_mods_subject_temporal_ms">
+              <xsl:value-of select="normalize-space(child::mods:temporal)"/>
+            </field>
+            <field name="utk_mods_subject_temporal_facets_ms">
               <xsl:value-of select="normalize-space(child::mods:temporal)"/>
             </field>
           </xsl:when>
@@ -263,6 +287,9 @@
                   <xsl:value-of select="$vGeo"/>
                 </xsl:otherwise>
               </xsl:choose>
+            </field>
+            <field name="utk_mods_geo_facet_ms">
+              <xsl:value-of select="normalize-space(child::mods:geographic)"/>
             </field>
           </xsl:when>
         </xsl:choose>
