@@ -13,11 +13,19 @@
       <xsl:with-param name="id" select='@ID'/>
       <xsl:with-param name="prefix">fedora_datastream_info</xsl:with-param>
     </xsl:call-template>
-    <xsl:apply-templates mode="index_object_datastreams"/>
+    -->
+    <xsl:apply-templates select="foxml:datastream[@ID='FEATURED']" mode="index_object_datastreams"/>
+    <!--
     <xsl:call-template name="fedora_datastream_attribute_fields">
       <xsl:with-param name="element" select="foxml:datastreamVersion[last()]"/>
       <xsl:with-param name="prefix">fedora_datastream_latest</xsl:with-param>
     </xsl:call-template>-->
+  </xsl:template>
+
+  <xsl:template match="foxml:datastream[@ID='FEATURED']" mode="index_object_datastreams">
+    <field name="utk_fedora_datastream_version_FEATURED_SIZE_ms">
+      <xsl:value-of select="child::foxml:datastreamVersion/@SIZE"/>
+    </field>
   </xsl:template>
 
   <!--<xsl:template match="foxml:datastreamVersion" mode="index_object_datastreams">

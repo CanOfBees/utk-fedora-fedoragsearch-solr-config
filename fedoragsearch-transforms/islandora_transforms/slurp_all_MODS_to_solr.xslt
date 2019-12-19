@@ -9,7 +9,7 @@
   <!-- <xsl:include href="/vhosts/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/config/index/FgsIndex/islandora_transforms/library/xslt-date-template.xslt"/>-->
   <!--<xsl:include href="/usr/share/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms/library/xslt-date-template.xslt"/>-->
   <!-- <xsl:include href="/vhosts/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/config/index/FgsIndex/islandora_transforms/manuscript_finding_aid.xslt"/> -->
-  <xsl:include href="/usr/share/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms/manuscript_finding_aid.xslt"/>
+    <xsl:include href="/usr/share/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms/manuscript_finding_aid.xslt"/>
   <!-- HashSet to track single-valued fields. -->
   <xsl:variable name="single_valued_hashset" select="java:java.util.HashSet.new()"/>
 
@@ -202,6 +202,9 @@
             <field name="utk_mods_subject_topic_ms">
               <xsl:value-of select="normalize-space(concat(child::mods:topic, $vAuthority))"/>
             </field>
+            <field name="utk_mods_subject_topic_facet_ms">
+              <xsl:value-of select="normalize-space(child::mods:topic)"/>
+            </field>
           </xsl:when>
           <xsl:when test="self::node()[mods:geographic]">
             <xsl:variable name="vGeo" select="child::mods:geographic"/>
@@ -216,9 +219,15 @@
                 </xsl:otherwise>
               </xsl:choose>
             </field>
+            <field name="utk_mods_geo_facet_ms">
+              <xsl:value-of select="normalize-space(child::mods:geographic)"/>
+            </field>
           </xsl:when>
           <xsl:when test="self::node()[mods:temporal]">
             <field name="utk_mods_subject_temporal_ms">
+              <xsl:value-of select="normalize-space(child::mods:temporal)"/>
+            </field>
+            <field name="utk_mods_subject_temporal_facet_ms">
               <xsl:value-of select="normalize-space(child::mods:temporal)"/>
             </field>
           </xsl:when>
@@ -228,15 +237,24 @@
         <field name="utk_mods_subject_topic_curriculumTopics_ms">
           <xsl:value-of select="normalize-space(concat(child::mods:topic,' ','(','Volunteer Voices',')'))"/>
         </field>
+        <field name="utk_mods_subject_topic_curriculumTopics_facets_ms">
+          <xsl:value-of select="normalize-space(child::mods:topic)"/>
+        </field>
       </xsl:when>
       <xsl:when test="self::node()[@displayLabel='Broad Topics']">
         <field name="utk_mods_subject_topic_broadTopics_ms">
           <xsl:value-of select="normalize-space(concat(child::mods:topic,' ','(','Volunteer Voices',')'))"/>
         </field>
+        <field name="utk_mods_subject_topic_broadTopics_facets_ms">
+          <xsl:value-of select="normalize-space(child::mods:topic)"/>
+        </field>
       </xsl:when>
       <xsl:when test="self::node()[@displayLabel='Tennessee Social Studies K-12 Eras in American History']">
         <field name="utk_mods_subject_topic_socStudiesK12_ms">
           <xsl:value-of select="normalize-space(concat(child::mods:topic,' ','(','Volunteer Voices',')'))"/>
+        </field>
+        <field name="utk_mods_subject_topic_socStudiesK12_facets_ms">
+          <xsl:value-of select="normalize-space(child::mods:topic)"/>
         </field>
       </xsl:when>
       <xsl:otherwise>
@@ -245,9 +263,15 @@
             <field name="utk_mods_subject_topic_ms">
               <xsl:value-of select="normalize-space(child::mods:topic)"/>
             </field>
+            <field name="utk_mods_subject_topic_facets_ms">
+              <xsl:value-of select="normalize-space(child::mods:topic)"/>
+            </field>
           </xsl:when>
           <xsl:when test="self::node()[mods:temporal]">
             <field name="utk_mods_subject_temporal_ms">
+              <xsl:value-of select="normalize-space(child::mods:temporal)"/>
+            </field>
+            <field name="utk_mods_subject_temporal_facets_ms">
               <xsl:value-of select="normalize-space(child::mods:temporal)"/>
             </field>
           </xsl:when>
@@ -263,6 +287,9 @@
                   <xsl:value-of select="$vGeo"/>
                 </xsl:otherwise>
               </xsl:choose>
+            </field>
+            <field name="utk_mods_geo_facet_ms">
+              <xsl:value-of select="normalize-space(child::mods:geographic)"/>
             </field>
           </xsl:when>
         </xsl:choose>
@@ -403,5 +430,33 @@
       <xsl:value-of select="child::mods:*[contains(local-name(),'dateCreated') or contains(local-name(),'dateOther')]"/>
     </field>
   </xsl:template>
-
+  
+  <!-- add utk_mods_relatedItem_featuredItem_titleInfo_title_ms -->
+  <xsl:template match="mods:relatedItem[@displayLabel='Featured Item']/mods:titleInfo/mods:title" mode="utk_MODS">
+    <field name="utk_mods_relatedItem_featuredItem_titleInfo_title_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
+  <!-- add utk_mods_relatedItem_featuredItem_identifier_ms -->
+  <xsl:template match="mods:relatedItem[@displayLabel='Featured Item']/mods:identifier" mode="utk_MODS">
+    <field name="utk_mods_relatedItem_featuredItem_identifier_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
+  <!-- add utk_mods_relatedItem_featuredItem_abstract_ms -->
+  <xsl:template match="mods:relatedItem[@displayLabel='Featured Item']/mods:abstract" mode="utk_MODS">
+    <field name="utk_mods_relatedItem_featuredItem_abstract_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
+  <!-- add utk_mods_relatedItem_featuredItem_date_ms -->
+  <xsl:template match="mods:relatedItem[@displayLabel='Featured Item']/mods:originInfo[mods:dateCreated or mods:dateIssued]" mode="utk_MODS">
+    <field name="utk_mods_relatedItem_featuredItem_date_ms">
+      <xsl:value-of select="normalize-space(.)"/>
+    </field>
+  </xsl:template>
+  
 </xsl:stylesheet>
