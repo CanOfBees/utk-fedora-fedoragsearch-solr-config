@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<foxml:digitalObject VERSION="1.1" PID="acwiley:280"
+xmlns:foxml="info:fedora/fedora-system:def/foxml#"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="info:fedora/fedora-system:def/foxml# http://www.fedora.info/definitions/1/0/foxml1-1.xsd">
+<foxml:objectProperties>
+<foxml:property NAME="info:fedora/fedora-system:def/model#state" VALUE="Active"/>
+<foxml:property NAME="info:fedora/fedora-system:def/model#label" VALUE="Pencil drawn portrait study of woman"/>
+<foxml:property NAME="info:fedora/fedora-system:def/model#ownerId" VALUE="comyn7"/>
+<foxml:property NAME="info:fedora/fedora-system:def/model#createdDate" VALUE="2018-03-23T16:12:34.296Z"/>
+<foxml:property NAME="info:fedora/fedora-system:def/view#lastModifiedDate" VALUE="2018-11-01T15:04:47.448Z"/>
+</foxml:objectProperties>
+<foxml:datastream ID="AUDIT" STATE="A" CONTROL_GROUP="X" VERSIONABLE="false">
+<foxml:datastreamVersion ID="AUDIT.0" LABEL="Audit Trail for this object" CREATED="2018-03-23T16:12:34.296Z" MIMETYPE="text/xml" FORMAT_URI="info:fedora/fedora-system:format/xml.fedora.audit">
+<foxml:xmlContent>
+<audit:auditTrail xmlns:audit="info:fedora/fedora-system:def/audit#">
+<audit:record ID="AUDREC1">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>TECHMD</audit:componentID>
+<audit:responsibility>comyn7</audit:responsibility>
+<audit:date>2018-03-23T16:24:57.849Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC2">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>TN</audit:componentID>
+<audit:responsibility>comyn7</audit:responsibility>
+<audit:date>2018-03-23T16:24:59.501Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC3">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>JPG</audit:componentID>
+<audit:responsibility>comyn7</audit:responsibility>
+<audit:date>2018-03-23T16:25:00.700Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC4">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>JP2</audit:componentID>
+<audit:responsibility>comyn7</audit:responsibility>
+<audit:date>2018-03-23T16:25:03.758Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC5">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>TN</audit:componentID>
+<audit:responsibility>islandora</audit:responsibility>
+<audit:date>2018-04-19T20:44:30.576Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC6">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>TN</audit:componentID>
+<audit:responsibility>islandora</audit:responsibility>
+<audit:date>2018-04-19T20:44:30.643Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC7">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>MODS</audit:componentID>
+<audit:responsibility>admin</audit:responsibility>
+<audit:date>2018-04-25T12:30:34.258Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC8">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>MODS</audit:componentID>
+<audit:responsibility>admin</audit:responsibility>
+<audit:date>2018-04-25T12:30:34.302Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC9">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyObject</audit:action>
+<audit:componentID></audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2018-05-24T21:28:53.381Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC10">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>MODS</audit:componentID>
+<audit:responsibility>admin</audit:responsibility>
+<audit:date>2018-11-01T15:04:47.319Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC11">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByReference</audit:action>
+<audit:componentID>MODS</audit:componentID>
+<audit:responsibility>admin</audit:responsibility>
+<audit:date>2018-11-01T15:04:47.448Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+</audit:auditTrail>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="RELS-EXT" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+<foxml:datastreamVersion ID="RELS-EXT.0" LABEL="Fedora Object to Object Relationship Metadata." CREATED="2018-03-23T16:12:34.296Z" MIMETYPE="application/rdf+xml" FORMAT_URI="info:fedora/fedora-system:FedoraRELSExt-1.0" SIZE="556">
+<foxml:xmlContent>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:fedora="info:fedora/fedora-system:def/relations-external#" xmlns:fedora-model="info:fedora/fedora-system:def/model#" xmlns:islandora="http://islandora.ca/ontology/relsext#">
+  <rdf:Description rdf:about="info:fedora/acwiley:280">
+    <fedora:isMemberOfCollection rdf:resource="info:fedora/collections:acwiley"></fedora:isMemberOfCollection>
+    <fedora-model:hasModel rdf:resource="info:fedora/islandora:sp_large_image_cmodel"></fedora-model:hasModel>
+  </rdf:Description>
+</rdf:RDF>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="MODS" STATE="A" CONTROL_GROUP="M" VERSIONABLE="true">
+<foxml:datastreamVersion ID="MODS.0" LABEL="MODS Record" CREATED="2018-03-23T16:12:34.296Z" MIMETYPE="application/xml" SIZE="2782">
+<foxml:contentDigest TYPE="SHA-256" DIGEST="fd9988d7175b2336ee4611cbe0d34bcc2e3cf11b9556f670d294521b0a4e8679"/>
+<foxml:contentLocation TYPE="INTERNAL_ID" REF="acwiley:280+MODS+MODS.0"/>
+</foxml:datastreamVersion>
+<foxml:datastreamVersion ID="MODS.1" LABEL="MODS Record" CREATED="2018-04-25T12:30:34.258Z" MIMETYPE="application/xml" SIZE="2782">
+<foxml:contentDigest TYPE="SHA-256" DIGEST="fd9988d7175b2336ee4611cbe0d34bcc2e3cf11b9556f670d294521b0a4e8679"/>
+<foxml:contentLocation TYPE="INTERNAL_ID" REF="acwiley:280+MODS+MODS.1"/>
+</foxml:datastreamVersion>
+<foxml:datastreamVersion ID="MODS.2" LABEL="MODS Record" CREATED="2018-04-25T12:30:34.302Z" MIMETYPE="application/xml" SIZE="3218">
+<foxml:contentDigest TYPE="SHA-256" DIGEST="65b94adcf872c012de5c115090fb7ec041262df8764618c0159e21ca3a69155b"/>
+<foxml:contentLocation TYPE="INTERNAL_ID" REF="acwiley:280+MODS+MODS.2"/>
+</foxml:datastreamVersion>
+<foxml:datastreamVersion ID="MODS.3" LABEL="MODS Record" CREATED="2018-11-01T15:04:47.319Z" MIMETYPE="application/xml" SIZE="3218">
+<foxml:contentDigest TYPE="SHA-256" DIGEST="65b94adcf872c012de5c115090fb7ec041262df8764618c0159e21ca3a69155b"/>
+<foxml:contentLocation TYPE="INTERNAL_ID" REF="acwiley:280+MODS+MODS.3"/>
+</foxml:datastreamVersion>
+<foxml:datastreamVersion ID="MODS.4" LABEL="MODS Record" CREATED="2018-11-01T15:04:47.448Z" MIMETYPE="application/xml" SIZE="3370">
+<foxml:contentDigest TYPE="SHA-256" DIGEST="0d80140623eb5543353e2edd62e508f15127f3d5c30918f5f148c1a026e6d004"/>
+<foxml:contentLocation TYPE="INTERNAL_ID" REF="acwiley:280+MODS+MODS.4"/>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="DC" STATE="A" CONTROL_GROUP="M" VERSIONABLE="true">
+<foxml:datastreamVersion ID="DC.0" LABEL="DC Record" CREATED="2018-03-23T16:12:34.296Z" MIMETYPE="application/xml" SIZE="1105">
+<foxml:contentLocation TYPE="INTERNAL_ID" REF="acwiley:280+DC+DC.0"/>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="OBJ" STATE="A" CONTROL_GROUP="M" VERSIONABLE="true">
+<foxml:datastreamVersion ID="OBJ.0" LABEL="OBJ Datastream" CREATED="2018-03-23T16:12:34.296Z" MIMETYPE="image/tiff" SIZE="91499324">
+<foxml:contentDigest TYPE="SHA-256" DIGEST="7ce87e6e8014dce0bdef141a7e35353930f2e1c1f9bbc544793ca946446b71e6"/>
+<foxml:contentLocation TYPE="INTERNAL_ID" REF="acwiley:280+OBJ+OBJ.0"/>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="TECHMD" STATE="A" CONTROL_GROUP="M" VERSIONABLE="true">
+<foxml:datastreamVersion ID="TECHMD.0" LABEL="TECHMD" CREATED="2018-03-23T16:24:57.849Z" MIMETYPE="application/xml" SIZE="6312">
+<foxml:contentLocation TYPE="INTERNAL_ID" REF="acwiley:280+TECHMD+TECHMD.0"/>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="TN" STATE="A" CONTROL_GROUP="M" VERSIONABLE="true">
+<foxml:datastreamVersion ID="TN.0" LABEL="Thumbnail" CREATED="2018-03-23T16:24:59.501Z" MIMETYPE="image/jpeg" SIZE="17570">
+<foxml:contentLocation TYPE="INTERNAL_ID" REF="acwiley:280+TN+TN.0"/>
+</foxml:datastreamVersion>
+<foxml:datastreamVersion ID="TN.1" LABEL="Thumbnail" CREATED="2018-04-19T20:44:30.576Z" MIMETYPE="image/png" SIZE="17570">
+<foxml:contentLocation TYPE="INTERNAL_ID" REF="acwiley:280+TN+TN.1"/>
+</foxml:datastreamVersion>
+<foxml:datastreamVersion ID="TN.2" LABEL="Thumbnail" CREATED="2018-04-19T20:44:30.643Z" MIMETYPE="image/png" SIZE="49729">
+<foxml:contentLocation TYPE="INTERNAL_ID" REF="acwiley:280+TN+TN.2"/>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="JPG" STATE="A" CONTROL_GROUP="M" VERSIONABLE="true">
+<foxml:datastreamVersion ID="JPG.0" LABEL="Medium sized JPEG" CREATED="2018-03-23T16:25:00.700Z" MIMETYPE="image/jpeg" SIZE="81130">
+<foxml:contentLocation TYPE="INTERNAL_ID" REF="acwiley:280+JPG+JPG.0"/>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="JP2" STATE="A" CONTROL_GROUP="M" VERSIONABLE="true">
+<foxml:datastreamVersion ID="JP2.0" LABEL="JPEG 2000" CREATED="2018-03-23T16:25:03.758Z" MIMETYPE="image/jp2" SIZE="1908782">
+<foxml:contentLocation TYPE="INTERNAL_ID" REF="acwiley:280+JP2+JP2.0"/>
+</foxml:datastreamVersion>
+</foxml:datastream>
+</foxml:digitalObject>

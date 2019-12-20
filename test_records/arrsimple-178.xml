@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mods xmlns="http://www.loc.gov/mods/v3"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      version="3.5"
+      xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-5.xsd">
+   <titleInfo>
+      <title>Student modeling heads.</title>
+   </titleInfo>
+   <name>
+      <namePart>Taylor, John C.</namePart>
+      <role>
+         <roleTerm authority="marcrelator"
+                   valueURI="http://id.loc.gov/vocabulary/relators/pht">Photographer</roleTerm>
+      </role>
+   </name>
+   <recordInfo>
+      <recordContentSource valueURI="http://id.loc.gov/authorities/names/n87808088">University of
+            Tennessee, Knoxville. Libraries</recordContentSource>
+      <languageOfCataloging>
+         <languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+      </languageOfCataloging>
+   </recordInfo>
+   <originInfo>
+      <dateCreated encoding="w3cdtf" point="start" keyDate="yes">1998-06-22</dateCreated>
+   </originInfo>
+   <accessCondition type="use and reproduction"
+                    xlink:href="http://rightsstatements.org/vocab/CNE/1.0/ ">Copyright Not
+            Evaluated</accessCondition>
+   <abstract>Student modeling heads during "Ceramic Sculpture".  June 22-July 3, 1998</abstract>
+   <subject authority="local">
+      <topic>Arts.</topic>
+   </subject>
+   <subject authority="local">
+      <topic>Ceramics.</topic>
+   </subject>
+   <subject authority="local">
+      <topic>People.</topic>
+   </subject>
+   <subject authority="local">
+      <topic>Arrowmont School of Arts and Crafts.</topic>
+   </subject>
+   <subject authority="local">
+      <topic> Arrowmont School of Arts and Crafts in the Modern Era, Gatlinburg, Tennessee, 1980-2004.</topic>
+   </subject>
+   <subject authority="local">
+      <geographic>Gatlinburg, Tennessee.</geographic>
+   </subject>
+   <subject authority="local">
+      <name>
+         <namePart>Taylor, John C.</namePart>
+         <role>
+            <roleTerm authority="marcrelator"
+                      valueURI="http://id.loc.gov/vocabulary/relators/pht">Photographer</roleTerm>
+         </role>
+      </name>
+   </subject>
+   <identifier type="local">TU:DLC:Filename:arm00000001001</identifier>
+   <location>
+      <physicalLocation displayLabel="Collection">Archives Collection</physicalLocation>
+      <physicalLocation displayLabel="Repository">Arrowmont School of Arts and Crafts</physicalLocation>
+      <physicalLocation displayLabel="Detailed Location"/>
+      <physicalLocation displayLabel="City">Gatlinburg</physicalLocation>
+      <physicalLocation displayLabel="State">Tennessee</physicalLocation>
+   </location>
+   <physicalDescription/>
+   <language>
+      <languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+   </language>
+   <typeOfResource>still image</typeOfResource>
+   <genre>photograph</genre>
+   <relatedItem type="host" displayLabel="Project">
+      <titleInfo>
+         <title>From Pi Beta Phi to Arrowmont Photographic Collection</title>
+      </titleInfo>
+   </relatedItem>
+   <note displayLabel="Project Part">Arrowmont Simple Images</note>
+</mods>
