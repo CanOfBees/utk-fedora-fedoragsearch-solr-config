@@ -17,7 +17,7 @@
                 xmlns:tei="http://www.tei-c.org/ns/1.0"
                 xmlns:mods="http://www.loc.gov/mods/v3"
                 xmlns:sparql="http://www.w3.org/2001/sw/DataAccess/rf1/result"
-                exclude-result-prefixes="#all"
+                exclude-result-prefixes="rel mods uvalibdesc tei uvalibadmin xlink fedora-model xs oai_dc eaccpf foxml dwc fedora sparql dc rdf res"
                 version="2.0">
 
   <!--
@@ -47,14 +47,14 @@
   <xsl:variable name="PID" select="/foxml:digitalObject/@PID"/>
 
   <!-- includes -->
-
+  <xsl:include href="islandora_transforms/MODS-to-solr.xsl"/>
 
   <xsl:template match="/">
-    <update>
+    <update type="test">
       <!-- ignore the foxml if foxml:datastream/@ID='methodmap' or 'ds-composite-model' -->
       <xsl:apply-templates select="foxml:digitalObject[foxml:datastream[@ID='METHODMAP' or @ID='DS-COMPOSITE-MODEL']]"/>
 
-      <xsl:apply-templates select="foxml:digitalObject[foxml:objectProperties/foxml:property[@NAME='info:fedora/fedora-system:def/model#state' and @VALUE='Active']]" mode="add-obj-to-index">
+      <xsl:apply-templates select="foxml:digitalObject[foxml:objectProperties/foxml:property[@NAME='info:fedora/fedora-system:def/model#state' and @VALUE='Active'] and not(foxml:datastream[@ID='METHODMAP' or @ID='DS-COMPOSITE-MODEL'])]" mode="add-obj-to-index">
         <xsl:with-param name="PID" select="$PID"/>
       </xsl:apply-templates>
       
@@ -62,11 +62,16 @@
     </update>
   </xsl:template>
   
-  <xsl:template match="foxml:digitalObject[foxml:objectProperties/foxml:property[@NAME='info:fedora/fedora-system:def/model#state' and @VALUE='Active'] and not(foxml:datastream[@ID='METHODMAP' or @ID='DS-COMPOSITE-MODEL'])]" mode="add-obj-to-index">
+  <!--
+    <xsl:template match="foxml:digitalObject[foxml:objectProperties/foxml:property[@NAME='info:fedora/fedora-system:def/model#state' and @VALUE='Active'] and not(foxml:datastream[@ID='METHODMAP' or @ID='DS-COMPOSITE-MODEL'])]" mode="add-obj-to-index">
     <xsl:call-template name="get-content-for-solr">
       <xsl:with-param name="PID" select="$PID"/>
     </xsl:call-template>
+    <xsl:apply-templates mode="add-obj-to-index">
+      <xsl:with-param name="PID" select="$PID"/>
+    </xsl:apply-templates>
   </xsl:template>
+  -->
   
   <xsl:template match="foxml:digitalObject[not(foxml:objectProperties/foxml:proptery[@NAME='info:fedora/fedora-system:def/model#state' and @VALUE='Active'])]" mode="remove-obj-from-index">
     <xsl:comment>from DGI's implementation.</xsl:comment>
