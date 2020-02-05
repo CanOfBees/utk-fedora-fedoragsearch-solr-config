@@ -87,6 +87,9 @@
       </xsl:apply-templates>
       
       <!-- process non-XML files; exactly how many non-XML characters to we need to worry about in these dsids? -->
+      <xsl:apply-templates select="foxml:datastream[@CONTROL_GROUP='M' and foxml:datastreamVersion[last()][not(@MIMETYPE = ('image', 'audio', 'video', 'application/pdf'))]]">
+        <xsl:with-param name="content" select="normalize-space(.)"/>
+      </xsl:apply-templates>
     </doc>
   </xsl:template>
   
